@@ -1,13 +1,28 @@
 package com.example.gamezone;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.squareup.picasso.Picasso;
+
+import java.util.List;
+
 public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.ViewHolder> {
+
+    private List<Video> allVideos;
+    private Context context;
+
+    public VideoAdapter(Context context, List<Video> allVideos) {
+        this.context = context;
+        this.allVideos = allVideos;
+    }
 
     @NonNull
     @Override
@@ -18,18 +33,26 @@ public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        // Bind your data here
+        Video video = allVideos.get(position);
+        holder.Title.setText(video.getTitle());
+
+        // Load the video thumbnail using Picasso
+        Picasso.get().load(video.getImageUrl()).into(holder.videoImage);
     }
 
     @Override
     public int getItemCount() {
-        return 5; // Modify this to return actual data size
+        return allVideos.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+        ImageView videoImage;
+        TextView Title;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            // Initialize your views from itemView here
+            videoImage = itemView.findViewById(R.id.video);
+            Title = itemView.findViewById(R.id.textView5);
         }
     }
 }
