@@ -1,3 +1,21 @@
 <resources>
     <string name="app_name">GameZone</string>
+    <string name="level">gameZone</string>
+    <string-array name="skill_levels">
+        <item>Level 1</item>
+        <item>Level 2</item>
+        <item>Level 3</item>
+        <item>Level 4</item>
+        <item>Level 5</item>
+    </string-array>
+
+
+    <string-array name="preferred_games">
+        <item>Game 1</item>
+        <item>Game 2</item>
+        <item>Game 3</item>
+        <item>Game 4</item>
+        <item>Game 5</item>
+         
+    </string-array>
 </resources>
