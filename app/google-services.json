@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "430408711375",
+    "project_id": "gamezone-8bcf8",
+    "storage_bucket": "gamezone-8bcf8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:430408711375:android:1d44db3e93b00cf5df4bba",
+        "android_client_info": {
+          "package_name": "com.example.gamezone"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC6HwUr-8fKSgklhSMjTT2NoSRgHqm0lUw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
