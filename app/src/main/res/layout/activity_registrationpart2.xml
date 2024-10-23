@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#1C1C1E"
+    tools:context=".Registrationpart2">
+
+
+    <ImageView
+        android:id="@+id/player_profile_picture"
+        android:layout_width="240dp"
+        android:layout_height="197dp"
+        android:layout_gravity="center"
+        android:paddingBottom="16dp"
+        android:src="@drawable/logo"
+
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Create player file"
+
+        android:textSize="25dp"
+        android:textColor="#FFA500"
+
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:paddingBottom="16dp" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+        android:text="choose your level"
+        android:textColor="#FFFFFF"
+        android:layout_gravity="left"
+        android:textSize="14sp"
+        android:paddingBottom="16dp" />
+    <Spinner
+        android:id="@+id/spinner_skill_level"
+        android:layout_width="293dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:padding="12dp"
+        android:background="@drawable/spinner_background"
+        android:backgroundTint="#0D0C0C"
+        android:entries="@array/skill_levels"
+        android:spinnerMode="dropdown"
+        android:textColor="#1A0B0B"
+        android:color="#D5C5C5"
+        />
+    <TextView
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+        android:layout_gravity="left"
+        android:text="choose your preferred games"
+        android:textColor="#FFFFFF"
+
+        android:textSize="14sp"
+        android:paddingBottom="14dp" />
+
+    <!-- Spinner لاختيار الألعاب المفضلة -->
+    <Spinner
+        android:id="@+id/spinner_preferred_games"
+        android:layout_width="297dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:padding="12dp"
+        android:background="@drawable/spinner_background"
+        android:spinnerMode="dropdown"
+        android:backgroundTint="#0D0C0C"
+        android:entries="@array/preferred_games"
+        android:textColor="#E2D8D8" />
+    <ImageButton
+        android:id="@+id/pickimg"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/images"
+        android:scaleType="fitXY"
+        android:layout_gravity="center"
+        android:onClick="opengallarie"
+        />
+    <Button
+        android:layout_marginTop="20dp"
+        android:id="@+id/btn_create_profile"
+
+        android:padding="12dp"
+        android:textSize="16sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:textColor="#FFFFFF"
+        android:buttonTint="#FFA500"
+        android:layout_marginEnd="32dp"
+        android:backgroundTint="#FFA500"
+        android:text="Create profile"
+        android:layout_gravity="center"/>
+
+
+
+
+</androidx.appcompat.widget.LinearLayoutCompat>
