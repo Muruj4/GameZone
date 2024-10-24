@@ -39,10 +39,12 @@ dependencies {
     implementation("androidx.constraintlayout:constraintlayout:2.1.3")
     implementation(libs.firebase.auth)
     implementation(libs.firebase.database)
+    implementation("com.google.android.gms:play-services-auth:20.7.0")
+    implementation("com.android.volley:volley:1.2.1")
+    implementation("com.squareup.picasso:picasso:2.8")
+    implementation("com.github.bumptech.glide:glide:4.16.0")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.3")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
-    implementation("com.android.volley:volley:1.2.1")
-    implementation ("com.squareup.picasso:picasso:2.8")
-
 }
+

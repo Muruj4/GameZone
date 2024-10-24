@@ -1,15 +1,13 @@
 package com.example.gamezone;
 
-
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -23,19 +21,18 @@ public class Registration extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_registration);
         mAuth = FirebaseAuth.getInstance();
-        et_fullName = (EditText) findViewById(R.id.FullName);
-        et_email = (EditText) findViewById(R.id.email);
-        et_password = (EditText) findViewById(R.id.Password);
-
+        et_fullName = findViewById(R.id.FullName);
+        et_email = findViewById(R.id.email);
+        et_password = findViewById(R.id.Password);
     }
 
     public void registerDB(View view) {
         String name = et_fullName.getText().toString();
         String email = et_email.getText().toString().trim();
         String password = et_password.getText().toString().trim();
+
         if (name.isEmpty()) {
             et_fullName.setError("Full Name is required");
             et_fullName.requestFocus();
@@ -46,7 +43,7 @@ public class Registration extends AppCompatActivity {
             et_email.requestFocus();
             return;
         }
-        if (password.isEmpty() || password.length() < 6) { //you can also check the num. of chars.
+        if (password.isEmpty() || password.length() < 6) {
             et_password.setError("Password is required and must be > 6");
             et_password.requestFocus();
             return;
@@ -56,6 +53,7 @@ public class Registration extends AppCompatActivity {
             et_email.requestFocus();
             return;
         }
+
         mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
@@ -68,7 +66,7 @@ public class Registration extends AppCompatActivity {
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if (task.isSuccessful()) {
                                         Toast.makeText(getApplicationContext(), "User has been registered!", Toast.LENGTH_LONG).show();
-                                        //redirect to the main page
+                                        // Redirect to the main page
                                     } else {
                                         Toast.makeText(getApplicationContext(), "FAILED: " + task.getException().toString(), Toast.LENGTH_LONG).show();
                                     }
