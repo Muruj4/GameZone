@@ -12,13 +12,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GameZone">
         <activity
-            android:name=".Registrationpart2"
-
+            android:name=".Registration"
             android:exported="false" />
-
         <activity
-
-            android:name=".Login"
+            android:name=".Registrationpart2"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -26,9 +23,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
-            android:name=".Registration"
+            android:name=".Login"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
