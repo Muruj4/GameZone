@@ -1,7 +1,6 @@
 package com.example.gamezone;
 
 import android.content.Intent;
-import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -9,10 +8,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.VideoView;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import android.widget.MediaController;
 
 public class videoPlayer extends AppCompatActivity {
 
@@ -32,30 +33,26 @@ public class videoPlayer extends AppCompatActivity {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
+        // Extract video data from the intent
         Intent intent = getIntent();
-        Bundle data= intent.getExtras();
-        Video v=(Video) data.getSerializable("tournamentData");
+        Bundle data = intent.getExtras();
+        Video v = (Video) data.getSerializable("tournamentData");
 
-                TextView title = findViewById(R.id.videoTitle);
-                TextView desc = findViewById(R.id.videoDescription);
-                VideoView videoPlayer = findViewById(R.id.videoView3);
+        TextView title = findViewById(R.id.videoTitle);
+        TextView desc = findViewById(R.id.videoDescription);
+        WebView videoWebView = findViewById(R.id.videoWebView);
 
-                title.setText(v.getTitle());
-                desc.setText(v.getDescription());
+        title.setText(v.getTitle());
+        desc.setText(v.getDescription());
 
-                Uri videoUrl = Uri.parse(v.getVideoUrl());
-                videoPlayer.setVideoURI(videoUrl);
+        // Set up WebView to load video URL
+        String videoUrl = v.getVideoUrl().replace("youtu.be/", "www.youtube.com/embed/");
+        videoWebView.setWebViewClient(new WebViewClient());
+        WebSettings webSettings = videoWebView.getSettings();
+        webSettings.setJavaScriptEnabled(true);
 
-                //buffer completion for avoiding video freezing
-                videoPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-                    @Override
-                    public void onPrepared(MediaPlayer mediaPlayer) {
-                        videoPlayer.start();
-                    }
-                });
-
-
-///
+        // Load the video URL in WebView
+        videoWebView.loadUrl(videoUrl);
     }
 
     @Override
@@ -67,4 +64,3 @@ public class videoPlayer extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 }
-//
