@@ -67,34 +67,34 @@
         android:padding="12dp"
         android:layout_marginBottom="24dp"
         android:inputType="textPassword" />
-    <RadioGroup
-        android:id="@+id/rg_role"
-        android:layout_width="match_parent"
+
+<RadioGroup
+    android:id="@+id/rg_role"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:gravity="center"
+    android:layout_marginBottom="24dp">
+<RadioButton
+    android:id="@+id/rb_player"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Player"
+    android:textColor="#FFFFFF"
+    android:layout_marginEnd="32dp"
+
+     />
+
+    <RadioButton
+        android:id="@+id/rb_organizer"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center"
-        android:layout_marginBottom="24dp">
+        android:text="Organizer"
+        android:textColor="#FFFFFF"
+        android:checked="true"
+        />
 
-        <RadioButton
-            android:id="@+id/rb_player"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Player"
-            android:textColor="#FFFFFF"
-            android:buttonTint="#FFA500"
-            android:layout_marginEnd="32dp"
-            android:backgroundTint="#FFA500"
-            android:onClick="onclickplayer"
-            />
-
-        <RadioButton
-            android:id="@+id/rb_organizer"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Organizer"
-            android:textColor="#FFFFFF"
-            android:buttonTint="#FFA500" />
-    </RadioGroup>
+</RadioGroup>
 
     <Button
         android:id="@+id/Register"
@@ -106,6 +106,4 @@
         android:padding="12dp"
         android:textSize="16sp"
         android:onClick="registerDB"/>
-
-
 </LinearLayout>

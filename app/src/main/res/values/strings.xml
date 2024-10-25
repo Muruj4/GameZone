@@ -12,12 +12,12 @@
 
 
     <string-array name="preferred_games">
-        <item>Game 1</item>
-        <item>Game 2</item>
-        <item>Game 3</item>
-        <item>Game 4</item>
-        <item>Game 5</item>
-         
+        <item>Fortnite</item>
+        <item>PUBG</item>
+        <item>Call of Duty</item>
+        <item>League of Legends</item>
+        <item>Destiny</item>
+
     </string-array>
 
 </resources>

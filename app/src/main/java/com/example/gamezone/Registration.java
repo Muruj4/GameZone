@@ -2,34 +2,40 @@ package com.example.gamezone;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Patterns;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class Registration extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private EditText et_fullName, et_password, et_email;
+    private DatabaseReference databaseReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
         mAuth = FirebaseAuth.getInstance();
+        databaseReference = FirebaseDatabase.getInstance().getReference("players");
+
         et_fullName = findViewById(R.id.FullName);
         et_email = findViewById(R.id.email);
         et_password = findViewById(R.id.Password);
     }
 
     public void registerDB(View view) {
-        String name = et_fullName.getText().toString();
+        String name = et_fullName.getText().toString().trim();
         String email = et_email.getText().toString().trim();
         String password = et_password.getText().toString().trim();
 
@@ -48,32 +54,40 @@ public class Registration extends AppCompatActivity {
             et_password.requestFocus();
             return;
         }
-        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            et_email.setError("Please provide valid Email");
-            et_email.requestFocus();
-            return;
-        }
 
+        // Register the user in Firebase Authentication
         mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
-                    Player user = new Player(name, email);
-                    FirebaseDatabase.getInstance().getReference("users").child(
-                                    FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(user).
-                            addOnCompleteListener(new OnCompleteListener<Void>() {
-                                @Override
-                                public void onComplete(@NonNull Task<Void> task) {
-                                    if (task.isSuccessful()) {
-                                        Toast.makeText(getApplicationContext(), "User has been registered!", Toast.LENGTH_LONG).show();
-                                        // Redirect to the main page
-                                    } else {
-                                        Toast.makeText(getApplicationContext(), "FAILED: " + task.getException().toString(), Toast.LENGTH_LONG).show();
-                                    }
-                                }
-                            });
+                    String playerId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                    Player player = new Player(playerId, name, email, null, null, null); // Initialize with null for skillLevel, preferredGame, and imageUrl
+                    sendDatatoFirebase(playerId, player); // Send player object to Firebase
                 } else {
                     Toast.makeText(getApplicationContext(), task.getException().toString(), Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+    }
+
+    private void sendDatatoFirebase(String playerId, Player player) {
+        databaseReference.child(playerId).setValue(player).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()) {
+                    // Check if the player radio button is selected before navigating
+                    RadioButton rbPlayer = findViewById(R.id.rb_player);
+                    if (rbPlayer.isChecked()) {
+                        Toast.makeText(getApplicationContext(), "Player has been registered!", Toast.LENGTH_LONG).show();
+                        // Navigate to RegistrationPart2 with the playerId
+                        Intent intent = new Intent(Registration.this, Registrationpart2.class);
+                        intent.putExtra("playerId", playerId); // Pass playerId to the next activity
+                        startActivity(intent);
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Please select the player role!", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Toast.makeText(getApplicationContext(), "Failed to save user data.", Toast.LENGTH_SHORT).show();
                 }
             }
         });
