@@ -13,10 +13,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GameZone">
         <activity
+            android:name=".videoPlayer"
+            android:exported="true" />
+        <activity
             android:name=".Registrationpart2"
             android:exported="false" />
         <activity
-            android:name=".Login"
+            android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,7 +31,7 @@
             android:name=".Registration"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".Login"
             android:exported="false" />
     </application>
 

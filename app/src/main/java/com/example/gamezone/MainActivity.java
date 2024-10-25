@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void getJsonData() {
         // Use your JSON URL
-        String URL = "https://raw.githubusercontent.com/YaraAlqarni/GameZone/main/app/src/main/assets/gaming_videos.json";
+        String URL = "https://raw.githubusercontent.com/YaraAlqarni/GameZone/refs/heads/main/gaming_videos.json";
 
         RequestQueue requestQueue = Volley.newRequestQueue(this);
 
@@ -68,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
                             JSONObject categoriesData = categories.getJSONObject(0);
                             JSONArray videos = categoriesData.getJSONArray("videos");
 
+
                             // Check if the videos array is empty
                             if (videos.length() == 0) {
                                 Log.d(TAG, "No videos found.");
@@ -81,8 +82,11 @@ public class MainActivity extends AppCompatActivity {
                                     Video v = new Video();
                                     v.setTitle(video.getString("title"));
                                     v.setDescription(video.getString("description"));
-                                    v.setVideoUrl(video.getString("videoUrl"));  // Ensure this key exists
-                                    v.setImageUrl(video.getString("imageUrl"));  // Ensure this key exists
+                                    v.setAuthor(video.getString("subtitle"));
+                                    JSONArray videoUrl =video.getJSONArray("sources");
+                                    v.setVideoUrl(videoUrl.getString(0));  // Ensure this key exists
+                                    v.setImageUrl(video.getString("thumb"));  // Ensure this key exists
+                                    Log.d(TAG,"onResponse: "+ v.getVideoUrl());
 
                                     allVideos.add(v);  // Add the video to the list
                                 }

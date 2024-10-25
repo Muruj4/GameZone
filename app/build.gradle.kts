@@ -46,5 +46,6 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
     implementation("com.android.volley:volley:1.2.1")
     implementation ("com.squareup.picasso:picasso:2.8")
+    implementation ("com.google.android.exoplayer:exoplayer:2.18.1")
 
 }

@@ -1,6 +1,9 @@
 package com.example.gamezone;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,12 +35,25 @@ public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.ViewHolder> 
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") final int position) {
+
         Video video = allVideos.get(position);
-        holder.Title.setText(video.getTitle());
+        holder.Title.setText(allVideos.get(position).getTitle());
 
         // Load the video thumbnail using Picasso
-        Picasso.get().load(video.getImageUrl()).into(holder.videoImage);
+        Picasso.get().load(allVideos.get(position).getImageUrl()).into(holder.videoImage);
+        holder.vv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+               Bundle b = new Bundle() ;
+               b.putSerializable("tournamentData",allVideos.get(position));
+                Intent i =new Intent(context, videoPlayer.class);
+                i.putExtras(b);
+                view.getContext().startActivity(i);
+
+
+            }
+        });
     }
 
     @Override
@@ -48,11 +64,13 @@ public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.ViewHolder> 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         ImageView videoImage;
         TextView Title;
+        View vv;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             videoImage = itemView.findViewById(R.id.video);
             Title = itemView.findViewById(R.id.textView5);
+            vv=itemView;
         }
     }
 }
