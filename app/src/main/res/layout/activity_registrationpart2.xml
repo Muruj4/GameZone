@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#1C1C1E"
+    tools:context=".Registrationpart2">
+
+    <!-- الشعار -->
+    <ImageView
+        android:id="@+id/player_profile_picture"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_gravity="center"
+        android:paddingBottom="24dp"
+        android:src="@drawable/logo"
+        android:contentDescription="Logo" />
+
+    <!-- نص إنشاء ملف اللاعب -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Create player file"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:textColor="#FFA500"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:paddingBottom="24dp" />
+
+    <!-- اختيار مستوى اللاعب -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Choose your level"
+        android:textColor="#FFFFFF"
+        android:textSize="14sp"
+        android:layout_gravity="start"
+        android:paddingBottom="16dp" />
+
+    <Spinner
+        android:id="@+id/spinner_skill_level"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:padding="12dp"
+        android:background="@drawable/spinner_background"
+        android:backgroundTint="#2C2C2E"
+        android:entries="@array/skill_levels"
+        android:spinnerMode="dropdown"
+        android:textColor="#FFFFFF" />
+
+    <!-- اختيار الألعاب المفضلة -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Choose your preferred games"
+        android:textColor="#FFFFFF"
+        android:textSize="14sp"
+        android:layout_gravity="start"
+        android:paddingBottom="14dp" />
+
+    <Spinner
+        android:id="@+id/spinner_preferred_games"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:padding="12dp"
+        android:background="@drawable/spinner_background"
+        android:spinnerMode="dropdown"
+        android:backgroundTint="#2C2C2E"
+        android:entries="@array/preferred_games"
+        android:textColor="#FFFFFF" />
+
+    <!-- زر اختيار صورة -->
+    <ImageButton
+        android:id="@+id/pickimg"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/images"
+        android:scaleType="fitXY"
+        android:layout_gravity="center"
+        android:onClick="opengallarie"
+        android:backgroundTint="#FFA500"
+
+
+        />
+
+    <!-- زر إنشاء ملف اللاعب -->
+    <Button
+        android:id="@+id/btn_create_profile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="12dp"
+        android:textSize="18sp"
+        android:layout_gravity="center"
+        android:textColor="#FFFFFF"
+        android:backgroundTint="#FFA500"
+        android:text="Create profile"
+        android:layout_marginTop="24dp" />
+</androidx.appcompat.widget.LinearLayoutCompat>
