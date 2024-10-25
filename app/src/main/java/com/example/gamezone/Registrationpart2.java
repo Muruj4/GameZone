@@ -119,7 +119,8 @@ public class Registrationpart2 extends AppCompatActivity {
                 // Data saved successfully
                 Toast.makeText(Registrationpart2.this, "Player profile updated successfully!", Toast.LENGTH_SHORT).show();
                 Log.i("Database", "Player profile updated successfully!");
-
+                // Remove finish(); to stay on the same activity
+                // Optionally, you can clear the fields or reset UI elements if needed
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
