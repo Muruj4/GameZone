@@ -47,5 +47,6 @@ dependencies {
     implementation("com.android.volley:volley:1.2.1")
     implementation ("com.squareup.picasso:picasso:2.8")
     implementation ("com.google.android.exoplayer:exoplayer:2.18.1")
+    implementation ("com.google.android.gms:play-services-maps:18.0.2")
 
 }
