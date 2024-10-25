@@ -64,7 +64,7 @@
             android:text="Enroll!"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            tools:layout_editor_absoluteX="146dp" />
+            tools:layo//ut_editor_absoluteX="146dp" />
 
         <ImageButton
             android:id="@+id/backButton"
