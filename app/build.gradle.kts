@@ -26,9 +26,6 @@ android {
             )
         }
     }
-
-
-
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
@@ -40,13 +37,16 @@ dependencies {
     implementation("com.google.android.material:material:1.5.0")
     implementation("androidx.activity:activity:1.4.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.3")
+    implementation ("com.google.android.gms:play-services-auth:20.5.0")
     implementation(libs.firebase.auth)
     implementation(libs.firebase.database)
-    implementation(libs.firebase.storage)
+    implementation ("com.google.firebase:firebase-storage:20.3.0")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.3")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
     implementation("com.android.volley:volley:1.2.1")
     implementation ("com.squareup.picasso:picasso:2.8")
+    implementation ("com.google.android.exoplayer:exoplayer:2.18.1")
+    implementation ("com.google.android.gms:play-services-maps:18.0.2")
 
 }

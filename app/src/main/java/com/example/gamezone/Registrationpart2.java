@@ -6,14 +6,13 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageButton;
-import android.widget.ImageView;
+import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
-import android.view.View;
-import android.widget.Spinner;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -31,6 +30,8 @@ public class Registrationpart2 extends AppCompatActivity {
     FirebaseStorage storage;
     StorageReference storageRef;
     DatabaseReference databaseReference;
+    String playerId; // To hold the playerId from the previous activity
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +42,10 @@ public class Registrationpart2 extends AppCompatActivity {
         // Initialize Firebase Storage
         storage = FirebaseStorage.getInstance();
         storageRef = storage.getReference();
+
+        // Get the playerId passed from the Registration activity
+        playerId = getIntent().getStringExtra("playerId");
+        databaseReference = FirebaseDatabase.getInstance().getReference("players").child(playerId); // Use the same playerId
     }
 
     public void opengallarie(View view) {
@@ -59,9 +64,8 @@ public class Registrationpart2 extends AppCompatActivity {
                 Bitmap decodeStream = BitmapFactory.decodeStream(inputStream);
                 pickImageButton.setImageBitmap(decodeStream);
 
-                // رفع الصورة إلى Firebase Storage
+                // Upload image to Firebase Storage
                 uploadImageToFirebase();
-
             } catch (Exception ex) {
                 Log.e("ex", ex.getMessage());
             }
@@ -70,19 +74,19 @@ public class Registrationpart2 extends AppCompatActivity {
 
     private void uploadImageToFirebase() {
         if (imageUri != null) {
-            // إنشاء مرجع للصورة داخل Firebase Storage
+            // Create a reference for the image in Firebase Storage
             StorageReference imageRef = storageRef.child("player_images/" + System.currentTimeMillis() + ".jpg");
 
-            // رفع الصورة
+            // Upload the image
             imageRef.putFile(imageUri)
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                            // الحصول على رابط الصورة بعد رفعها
+                            // Get the image URL after uploading
                             imageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                                 @Override
                                 public void onSuccess(Uri downloadUrl) {
-                                    // حفظ بيانات اللاعب في قاعدة البيانات
+                                    // Save player data to the database
                                     saveToDatabase(downloadUrl.toString());
                                 }
                             }).addOnFailureListener(new OnFailureListener() {
@@ -103,22 +107,20 @@ public class Registrationpart2 extends AppCompatActivity {
     }
 
     private void saveToDatabase(String imageUrl) {
-        databaseReference = FirebaseDatabase.getInstance().getReference("players");
-
-        String playerId = databaseReference.push().getKey();
-        Log.d("PlayerID", "Generated PlayerID: " + playerId);
         String skillLevel = ((Spinner) findViewById(R.id.spinner_skill_level)).getSelectedItem().toString();
         String preferredGame = ((Spinner) findViewById(R.id.spinner_preferred_games)).getSelectedItem().toString();
 
-        // إنشاء كائن لاعب يحتوي على جميع المعلومات بما في ذلك رابط الصورة
-        Player player = new Player(playerId, skillLevel, preferredGame, imageUrl); // استخدام رابط الصورة المرفوعة
-
-        // تخزين بيانات اللاعب في قاعدة البيانات
-        databaseReference.child(playerId).setValue(player).addOnSuccessListener(new OnSuccessListener<Void>() {
+        // Update the player's existing data in the database
+        databaseReference.child("skillLevel").setValue(skillLevel);
+        databaseReference.child("preferredGame").setValue(preferredGame);
+        databaseReference.child("imageUrl").setValue(imageUrl).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
-                // البيانات تم تخزينها بنجاح
-                Log.i("Database", "Player profile created successfully!");
+                // Data saved successfully
+                Toast.makeText(Registrationpart2.this, "Player profile updated successfully!", Toast.LENGTH_SHORT).show();
+                Log.i("Database", "Player profile updated successfully!");
+                // Remove finish(); to stay on the same activity
+                // Optionally, you can clear the fields or reset UI elements if needed
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override

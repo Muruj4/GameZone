@@ -1,33 +1,47 @@
 package com.example.gamezone;
 
 public class Player {
-    public String playerId;
-    public String skillLevel;
-    public String preferredGame;
-    public String imageUrl;
-    public String fullName; // عدلت الاسم إلى أحرف صغيرة
-    public String email;
+    private String playerId;
+    private String fullName;
+    private String email;
+    private String skillLevel;
+    private String preferredGame;
+    private String imageUrl;
 
-    // Constructor الأول لإنشاء لاعب جديد باستخدام الاسم والبريد الإلكتروني
-    public Player(String fullName, String email) {
-        this.fullName = fullName; // استخدم الحروف الصغيرة هنا أيضًا
-        this.email = email;
+    // Default constructor required for DataSnapshot.getValue(Player.class)
+    public Player() {
     }
 
-    // Constructor الثاني يتعامل مع معلومات اللاعب الأخرى
-    public Player(String playerId, String skillLevel, String preferredGame, String imageUrl) {
+    // Constructor for creating a player with all details
+    public Player(String playerId, String fullName, String email, String skillLevel, String preferredGame, String imageUrl) {
         this.playerId = playerId;
+        this.fullName = fullName;
+        this.email = email;
         this.skillLevel = skillLevel;
         this.preferredGame = preferredGame;
         this.imageUrl = imageUrl;
     }
 
-    // Getter and Setter methods
-    public void setEmail(String email) {
+    // Constructor for creating a player with just name and email
+    public Player(String fullName, String email) {
+        this.fullName = fullName;
         this.email = email;
     }
 
-    public void setFullName(String fullName) { // الدالة تم تعديلها لتطابق اسم المتغير
+    // Getters and Setters
+    public String getPlayerId() {
+        return playerId;
+    }
+
+    public void setPlayerId(String playerId) {
+        this.playerId = playerId;
+    }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
         this.fullName = fullName;
     }
 
@@ -35,11 +49,31 @@ public class Player {
         return email;
     }
 
-    public String getFullName() { // الدالة تم تعديلها لتطابق اسم المتغير
-        return fullName;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    // Constructor افتراضي مطلوب لاستدعاء DataSnapshot.getValue(Player.class)
-    public Player() {
+    public String getSkillLevel() {
+        return skillLevel;
+    }
+
+    public void setSkillLevel(String skillLevel) {
+        this.skillLevel = skillLevel;
+    }
+
+    public String getPreferredGame() {
+        return preferredGame;
+    }
+
+    public void setPreferredGame(String preferredGame) {
+        this.preferredGame = preferredGame;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }

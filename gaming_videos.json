@@ -1,0 +1,44 @@
+{
+  "categories": [
+    {
+      "name": "Tournaments",
+      "videos": [
+        {
+          "description": "Gamers is one of the biggest esports festivals in Saudi Arabia, featuring global tournaments across various popular games, with millions in prize money and live concerts. The event takes place in Riyadh, bringing together professional gamers from around the world.",
+          "sources": ["https://youtu.be/rB-AhP4JZnw"],
+          "subtitle": "By Saudi Esports Federation",
+          "thumb": "https://img.youtube.com/vi/rB-AhP4JZnw/0.jpg",
+          "title": "Gamers8"
+        },
+        {
+          "description": "The PUBG Mobile Star Challenge World Cup was held in Riyadh, Saudi Arabia, where top teams from around the world competed in intense matches for the championship title and significant cash prizes.",
+          "sources": ["https://youtu.be/V38TITfF03A"],
+          "subtitle": "By PUBG Mobile Esports",
+          "thumb": "https://img.youtube.com/vi/V38TITfF03A/0.jpg",
+          "title": "PUBG Mobile Star Challenge "
+        },
+        {
+          "description": "The Rocket League MENA Cup, hosted in Riyadh, Saudi Arabia, attracted the best Rocket League teams from the Middle East and North Africa for a regional championship with high-stakes gameplay.",
+          "sources": ["https://youtu.be/WoIu8zOZRVA"],
+          "subtitle": "By Rocket League Esports",
+          "thumb": "https://img.youtube.com/vi/WoIu8zOZRVA/0.jpg",
+          "title": "Rocket League MENA Cup"
+        },
+        {
+          "description": "The Intel Arabian Cup, supported by Intel and Riot Games, is a League of Legends tournament that brings together the best players and teams from Saudi Arabia and the MENA region for exciting esports action and valuable prizes.",
+          "sources": ["https://youtu.be/yiy-udF31TI"],
+          "subtitle": "By Riot Games",
+          "thumb": "https://img.youtube.com/vi/yiy-udF31TI/0.jpg",
+          "title": "Intel Arabian Cup"
+        },
+        {
+          "description": "The FIFA eWorld Cup Qualifiers in Saudi Arabia allowed top FIFA players from the MENA region to compete for a place in the prestigious FIFA eWorld Cup, showcasing elite soccer gaming skills.",
+          "sources": ["https://youtu.be/VIHOBnFqOvw"],
+          "subtitle": "By FIFA Esports",
+          "thumb": "https://img.youtube.com/vi/VIHOBnFqOvw/0.jpg",
+          "title": "FIFA eWorld Cup Qualifiers"
+        }
+      ]
+    }
+  ]
+}
