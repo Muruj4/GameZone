@@ -19,5 +19,42 @@
         <item>Destiny</item>
 
     </string-array>
-
+    <string-array name="nationalities">
+        <item>Saudi</item>
+        <item>American</item>
+        <item>British</item>
+        <item>Canadian</item>
+        <item>Australian</item>
+        <item>French</item>
+        <item>German</item>
+        <item>Indian</item>
+        <item>Pakistani</item>
+        <item>Egyptian</item>
+        <item>Jordanian</item>
+        <item>Lebanese</item>
+        <item>Moroccan</item>
+        <item>Tunisian</item>
+        <item>Sudanese</item>
+        <item>Emirati</item>
+        <item>Kuwaiti</item>
+        <item>Bahraini</item>
+        <item>Qatari</item>
+        <item>Omani</item>
+        <item>Yemeni</item>
+        <item>Turkish</item>
+        <item>Italian</item>
+        <item>Spanish</item>
+        <item>Japanese</item>
+        <item>South Korean</item>
+        <item>Chinese</item>
+        <item>Russian</item>
+        <item>Brazilian</item>
+        <item>Mexican</item>
+        <item>South African</item>
+        <item>Nigerian</item>
+        <item>Kenyan</item>
+        <item>Indonesian</item>
+        <item>Malaysian</item>
+        <item>Philippine</item>
+    </string-array>
 </resources>

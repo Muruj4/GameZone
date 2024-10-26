@@ -7,7 +7,9 @@ public class Player {
     private String skillLevel;
     private String preferredGame;
     private String imageUrl;
-
+    private String nickname;
+    private String nationality;
+    private String birthdate;
     // Default constructor required for DataSnapshot.getValue(Player.class)
     public Player() {
     }
@@ -20,6 +22,18 @@ public class Player {
         this.skillLevel = skillLevel;
         this.preferredGame = preferredGame;
         this.imageUrl = imageUrl;
+    }
+    // Constructor for creating a player with all details
+    public Player(String playerId, String fullName, String email, String skillLevel, String preferredGame, String imageUrl, String nickname, String nationality, String birthdate) {
+        this.playerId = playerId;
+        this.fullName = fullName;
+        this.email = email;
+        this.skillLevel = skillLevel;
+        this.preferredGame = preferredGame;
+        this.imageUrl = imageUrl;
+        this.nickname = nickname;
+        this.nationality = nationality;
+        this.birthdate = birthdate;
     }
 
     // Constructor for creating a player with just name and email
@@ -76,4 +90,28 @@ public class Player {
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
     }
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
+    public String getNationality() {
+        return nationality;
+    }
+
+    public void setNationality(String nationality) {
+        this.nationality = nationality;
+    }
+
+    public String getBirthdate() {
+        return birthdate;
+    }
+
+    public void setBirthdate(String birthdate) {
+        this.birthdate = birthdate;
 }
+}
+
