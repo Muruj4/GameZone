@@ -7,6 +7,9 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -23,6 +26,7 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.InputStream;
+import java.util.Calendar;
 
 public class Registrationpart2 extends AppCompatActivity {
     Uri imageUri;
@@ -32,12 +36,19 @@ public class Registrationpart2 extends AppCompatActivity {
     DatabaseReference databaseReference;
     String playerId; // To hold the playerId from the previous activity
 
+    EditText nicknameField;
+    Spinner nationalitySpinner;
+    DatePicker birthdatePicker;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registrationpart2);
 
         pickImageButton = findViewById(R.id.pickimg);
+        nicknameField = findViewById(R.id.nickname_field);
+        nationalitySpinner = findViewById(R.id.spinner_nationality);
+        birthdatePicker = findViewById(R.id.birthdate_picker);
 
         // Initialize Firebase Storage
         storage = FirebaseStorage.getInstance();
@@ -46,6 +57,15 @@ public class Registrationpart2 extends AppCompatActivity {
         // Get the playerId passed from the Registration activity
         playerId = getIntent().getStringExtra("playerId");
         databaseReference = FirebaseDatabase.getInstance().getReference("players").child(playerId); // Use the same playerId
+
+        // Button to create profile and save data
+        Button createProfileButton = findViewById(R.id.btn_create_profile);
+        createProfileButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                uploadImageToFirebase();
+            }
+        });
     }
 
     public void opengallarie(View view) {
@@ -103,24 +123,45 @@ public class Registrationpart2 extends AppCompatActivity {
                             Log.e("Upload Error", e.getMessage());
                         }
                     });
+        } else {
+            // If no image is selected, save data without the image URL
+            saveToDatabase(null);
         }
     }
 
     private void saveToDatabase(String imageUrl) {
         String skillLevel = ((Spinner) findViewById(R.id.spinner_skill_level)).getSelectedItem().toString();
         String preferredGame = ((Spinner) findViewById(R.id.spinner_preferred_games)).getSelectedItem().toString();
+        String nickname = nicknameField.getText().toString();
+        String nationality = nationalitySpinner.getSelectedItem().toString();
+
+        // Get selected birthdate
+        int day = birthdatePicker.getDayOfMonth();
+        int month = birthdatePicker.getMonth();
+        int year = birthdatePicker.getYear();
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(year, month, day);
+        String birthdate = day + "/" + (month + 1) + "/" + year;  // Convert to a string in format "dd/MM/yyyy"
 
         // Update the player's existing data in the database
         databaseReference.child("skillLevel").setValue(skillLevel);
         databaseReference.child("preferredGame").setValue(preferredGame);
+        databaseReference.child("nickname").setValue(nickname);
+        databaseReference.child("nationality").setValue(nationality);
+        databaseReference.child("birthdate").setValue(birthdate);
+
+        if (imageUrl != null) {
+            databaseReference.child("imageUrl").setValue(imageUrl);
+        }
+
         databaseReference.child("imageUrl").setValue(imageUrl).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
                 // Data saved successfully
                 Toast.makeText(Registrationpart2.this, "Player profile updated successfully!", Toast.LENGTH_SHORT).show();
                 Log.i("Database", "Player profile updated successfully!");
-                // Remove finish(); to stay on the same activity
-                // Optionally, you can clear the fields or reset UI elements if needed
+                // Optionally, navigate to another activity or clear the form
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
