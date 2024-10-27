@@ -1,0 +1,18 @@
+<resources>
+<!--    <style name="DatePickerTheme" parent="Theme.AppCompat.Light.Dialog">-->
+<!--        <item name="android:colorAccent">@color/white</item>-->
+<!--        <item name="android:datePickerDialogTheme">@style/MyDatePickerDialogTheme</item>-->
+<!--    </style>-->
+
+    <style name="MyDatePickerDialogTheme" parent="Theme.AppCompat.Light.Dialog">
+        <!-- Add other customizations here -->
+    </style>
+    <style name="DatePickerTheme" parent="Theme.AppCompat.Light">
+        <item name="android:datePickerStyle">@style/CustomDatePicker</item>
+    </style>
+s,d .d
+    <style name="CustomDatePicker" parent="Theme.AppCompat.Light.Dialog">
+        <item name="android:background">#FFA500</item>
+    </style>
+   
+</resources>
