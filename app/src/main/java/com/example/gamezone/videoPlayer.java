@@ -87,10 +87,10 @@ public class videoPlayer extends AppCompatActivity implements OnMapReadyCallback
         mMap = googleMap;
 
         // Coordinates of the location from the link you shared
-        LatLng location = new LatLng(24.774265, 46.738586); // Update with your coordinates
+        LatLng location = new LatLng(24.774265, 46.738586);
         mMap.addMarker(new MarkerOptions().position(location).title("Event Location"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(location));
-        mMap.animateCamera(CameraUpdateFactory.zoomTo(15)); // Zoom level 15 for a closer view
+        mMap.animateCamera(CameraUpdateFactory.zoomTo(15));
     }
 
     @Override
