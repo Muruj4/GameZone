@@ -21,8 +21,6 @@ import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GoogleAuthProvider;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 public class Login extends AppCompatActivity {
     private static final int RC_SIGN_IN = 9001;
@@ -67,8 +65,8 @@ public class Login extends AppCompatActivity {
             GoogleSignInAccount account = completedTask.getResult(ApiException.class);
             firebaseAuthWithGoogle(account);
         } catch (ApiException e) {
-            Log.w("Login", "Google sign in failed", e);
-            Toast.makeText(this, "Google sign in failed.", Toast.LENGTH_SHORT).show();
+            Log.w("Login", "Google sign-in failed", e);
+            Toast.makeText(this, "Google sign-in failed.", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -79,29 +77,9 @@ public class Login extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
                     Toast.makeText(Login.this, "Google Sign-In successful", Toast.LENGTH_SHORT).show();
-                    saveUserToDatabase(acct);
-                    //intent
+                    // Navigate to the next screen if login is successful
                 } else {
                     Toast.makeText(Login.this, "Authentication Failed.", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-    }
-
-    private void saveUserToDatabase(GoogleSignInAccount account) {
-        String uid = mAuth.getCurrentUser().getUid();
-        String name = account.getDisplayName();
-        String email = account.getEmail();
-        Player user = new Player(name, email);
-
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("users").child(uid);
-        databaseReference.setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                if (task.isSuccessful()) {
-                    Toast.makeText(Login.this, "User has been registered!", Toast.LENGTH_LONG).show();
-                } else {
-                    Toast.makeText(Login.this, "Failed to save user data.", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -132,7 +110,7 @@ public class Login extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
                     Toast.makeText(getApplicationContext(), "Login Successful!", Toast.LENGTH_LONG).show();
-                    //intent
+                    // Navigate to the next screen if login is successful
                 } else {
                     Toast.makeText(getApplicationContext(), "Login Failed: " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
                 }

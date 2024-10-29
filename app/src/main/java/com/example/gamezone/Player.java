@@ -15,15 +15,6 @@ public class Player {
     }
 
     // Constructor for creating a player with all details
-    public Player(String playerId, String fullName, String email, String skillLevel, String preferredGame, String imageUrl) {
-        this.playerId = playerId;
-        this.fullName = fullName;
-        this.email = email;
-        this.skillLevel = skillLevel;
-        this.preferredGame = preferredGame;
-        this.imageUrl = imageUrl;
-    }
-    // Constructor for creating a player with all details
     public Player(String playerId, String fullName, String email, String skillLevel, String preferredGame, String imageUrl, String nickname, String nationality, String birthdate) {
         this.playerId = playerId;
         this.fullName = fullName;

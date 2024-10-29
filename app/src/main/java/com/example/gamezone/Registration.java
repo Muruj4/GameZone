@@ -55,14 +55,14 @@ public class Registration extends AppCompatActivity {
             return;
         }
 
-        // Register the user in Firebase Authentication
+
         mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
                     String playerId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                    Player player = new Player(playerId, name, email, null, null, null); // Initialize with null for skillLevel, preferredGame, and imageUrl
-                    sendDatatoFirebase(playerId, player); // Send player object to Firebase
+                    Player player = new Player(playerId, name, email, null, null, null,null,null,null);
+                    sendDatatoFirebase(playerId, player);
                 } else {
                     Toast.makeText(getApplicationContext(), task.getException().toString(), Toast.LENGTH_LONG).show();
                 }
@@ -75,13 +75,11 @@ public class Registration extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()) {
-                    // Check if the player radio button is selected before navigating
                     RadioButton rbPlayer = findViewById(R.id.rb_player);
                     if (rbPlayer.isChecked()) {
                         Toast.makeText(getApplicationContext(), "Player has been registered!", Toast.LENGTH_LONG).show();
-                        // Navigate to RegistrationPart2 with the playerId
                         Intent intent = new Intent(Registration.this, Registrationpart2.class);
-                        intent.putExtra("playerId", playerId); // Pass playerId to the next activity
+                        intent.putExtra("playerId", playerId);
                         startActivity(intent);
                     } else {
                         Toast.makeText(getApplicationContext(), "Please select the player role!", Toast.LENGTH_SHORT).show();
