@@ -21,7 +21,10 @@ public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.ViewHolder> 
 
     private List<Video> allVideos;
     private Context context;
-
+    public void setFilteredList(List<Video> filteredVideos) {
+        this.allVideos = filteredVideos;
+        notifyDataSetChanged();  // تحديث البيانات في الـ RecyclerView
+    }
     public VideoAdapter(Context context, List<Video> allVideos) {
         this.context = context;
         this.allVideos = allVideos;

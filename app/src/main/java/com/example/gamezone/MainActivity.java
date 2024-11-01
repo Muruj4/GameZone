@@ -29,7 +29,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
+import android.widget.SearchView;
 public class MainActivity extends AppCompatActivity {
 
     RecyclerView videoList;
@@ -37,7 +37,8 @@ public class MainActivity extends AppCompatActivity {
     TextView noVideosText;  // TextView to show when no videos are available
     private static final String TAG = "MainActivity";
     List<Video> allVideos;
-
+    SearchView searchView;
+    private List<Tournament> allTournaments = new ArrayList<>();
     // Firebase database reference for tournaments
     private DatabaseReference tournamentDatabaseReference;
 
@@ -49,8 +50,24 @@ public class MainActivity extends AppCompatActivity {
         // Initialize the RecyclerView and TextView
         videoList = findViewById(R.id.videoList);
         noVideosText = findViewById(R.id.noVideosText);
-
+        searchView = findViewById(R.id.searchView);
+        searchView.clearFocus();
         allVideos = new ArrayList<>();
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                // تنفيذ الفلترة عند إدخال المستخدم النص الكامل والضغط على "بحث"
+                filterVideos(query);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                // تنفيذ الفلترة عند كل تغيير في النص المدخل
+                filterVideos(newText);
+                return true;
+            }
+        });
         videoList.setLayoutManager(new LinearLayoutManager(this));
 
         // Set the adapter with the initial empty list
@@ -169,4 +186,29 @@ public class MainActivity extends AppCompatActivity {
             });
         }
     }
+
+
+
+    private void filterVideos(String query) {
+        List<Video> filteredVideos = new ArrayList<>();
+
+        // Convert query to lowercase for case-insensitive search
+        String searchQuery = query.toLowerCase();
+        for (Video video : allVideos) {
+            if (video.getTitle().toLowerCase().contains(searchQuery) ||
+                    video.getDescription().toLowerCase().contains(searchQuery)) {
+                // إذا تطابق الفيديو، إضافته إلى القائمة المفلترة
+                filteredVideos.add(video);
+            }
+        }
+
+
+        if (filteredVideos.isEmpty()) {
+            Toast.makeText(this, "No data found", Toast.LENGTH_SHORT).show();
+        } else {
+
+            adapter.setFilteredList(filteredVideos);
+        }
+    }
+
 }
