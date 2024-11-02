@@ -57,4 +57,12 @@
         <item>Malaysian</item>
         <item>Philippine</item>
     </string-array>
+
+        <!-- Default range for the prize slider -->
+        <string-array name="default_range">
+            <item>10000</item> <!-- Starting value -->
+            <item>100000000</item> <!-- Ending value -->
+        </string-array>
+
+
 </resources>

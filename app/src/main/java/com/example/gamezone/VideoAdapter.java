@@ -21,15 +21,18 @@ public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.ViewHolder> 
 
     private List<Video> allVideos;
     private Context context;
+
+
     public void setFilteredList(List<Video> filteredVideos) {
-        this.allVideos = filteredVideos;
-        notifyDataSetChanged();  // تحديث البيانات في الـ RecyclerView
+        allVideos.clear(); // Clear the existing items in the adapter
+        allVideos.addAll(filteredVideos); // Add the filtered list to the adapter's list
+        notifyDataSetChanged(); // Notify the adapter that the data set has changed
     }
     public VideoAdapter(Context context, List<Video> allVideos) {
         this.context = context;
         this.allVideos = allVideos;
     }
-///
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -75,5 +78,8 @@ public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.ViewHolder> 
             Title = itemView.findViewById(R.id.textView5);
             vv=itemView;
         }
+
+
+
     }
 }

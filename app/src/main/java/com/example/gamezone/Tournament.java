@@ -7,7 +7,7 @@ public class Tournament {
     private String title;
     private String description;
     private List<String> mode;
-    private String prize;
+    private long prize;
     private String duration;
     private String startDate;
     private String level;
@@ -17,7 +17,7 @@ public class Tournament {
     public Tournament() {
     }
 
-    public Tournament(String id, String title, String description, List<String> mode, String prize,
+    public Tournament(String id, String title, String description, List<String> mode, long prize,
                       String duration, String startDate, String level, List<String> games) {
         this.id = id;
         this.title = title;
@@ -63,11 +63,11 @@ public class Tournament {
         this.mode = mode;
     }
 
-    public String getPrize() {
+    public long getPrize() {
         return prize;
     }
 
-    public void setPrize(String prize) {
+    public void setPrize(long prize) {
         this.prize = prize;
     }
 

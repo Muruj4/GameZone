@@ -1,6 +1,7 @@
 package com.example.gamezone;
-
 import java.io.Serializable;
+import java.io.Serializable;
+import java.util.List;
 
 public class Video implements Serializable {
     private String title;
@@ -9,6 +10,10 @@ public class Video implements Serializable {
     private String videoUrl;
     private String imageUrl;
 
+    private double prizeAmount;    // Add prizeAmount field
+    private String level;          // Add level field
+    private List<String> modes;
+
     public String getAuthor() {
         return author;
     }
@@ -16,9 +21,8 @@ public class Video implements Serializable {
     public void setAuthor(String author) {
         this.author = author;
     }
-//
 
-    // Getters and Setters
+    // Getters and Setters for basic details
     public String getTitle() {
         return title;
     }
@@ -50,4 +54,35 @@ public class Video implements Serializable {
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
     }
+
+    // New getter and setter for mode
+    public List<String> getModes() {
+        return modes;
+    }
+
+    public void setModes(List<String> modes) {
+        this.modes = modes;
+    }
+
+
+    // New getter and setter for prizeAmount
+    public double getPrizeAmount() {
+        return prizeAmount;
+    }
+
+    public void setPrizeAmount(double prizeAmount) {
+        this.prizeAmount = prizeAmount;
+    }
+
+    // New getter and setter for level
+    public String getLevel() {
+        return level;
+    }
+
+    public void setLevel(String level) {
+        this.level = level;
+    }
 }
+
+
+
