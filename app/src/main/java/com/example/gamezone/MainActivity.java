@@ -1,53 +1,43 @@
 package com.example.gamezone;
-
+import android.content.res.ColorStateList;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.SearchView;
+import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.Toast;
-import android.widget.SearchView;
-
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
+import com.google.android.material.button.MaterialButtonToggleGroup;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
-import com.google.android.material.chip.Chip;
-import com.google.android.material.chip.ChipGroup;
-import com.google.android.material.slider.RangeSlider;
-
+import java.util.Map;
+import java.util.Objects;
 public class MainActivity extends AppCompatActivity {
 
     private RecyclerView videoList;
-    private VideoAdapter adapter;
+    private VideoAdapter videoAdapter;
     private TextView noVideosText;
     private SearchView searchView;
-    private Button toggleFilterButton, applyFiltersButton;
-    private LinearLayout filterDrawer;
-    private ChipGroup chipGroupMode;
-    private RangeSlider sliderPrizeRange;
-
+    private MaterialButtonToggleGroup segmentedControl;
     private static final String TAG = "MainActivity";
     private List<Video> allVideos = new ArrayList<>();
     private DatabaseReference tournamentDatabaseReference;
+    private boolean isCategorizedView = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,16 +48,12 @@ public class MainActivity extends AppCompatActivity {
         videoList = findViewById(R.id.videoList);
         noVideosText = findViewById(R.id.noVideosText);
         searchView = findViewById(R.id.searchView);
-        toggleFilterButton = findViewById(R.id.toggleFilterButton);
-        filterDrawer = findViewById(R.id.filterDrawer);
-        chipGroupMode = findViewById(R.id.chipGroupMode);
-        sliderPrizeRange = findViewById(R.id.sliderPrizeRange);
-        sliderPrizeRange.setValues(10000f, 100000000f); // Set initial slider values
-        applyFiltersButton = findViewById(R.id.applyFiltersButton);
+        segmentedControl = findViewById(R.id.segmentedControl);
 
-        adapter = new VideoAdapter(this, allVideos);
+        // Set up RecyclerView with VideoAdapter
         videoList.setLayoutManager(new LinearLayoutManager(this));
-        videoList.setAdapter(adapter);
+        videoAdapter = new VideoAdapter(this, allVideos);
+        videoList.setAdapter(videoAdapter);
 
         // Initialize Firebase reference
         tournamentDatabaseReference = FirebaseDatabase.getInstance().getReference("tournaments");
@@ -94,27 +80,41 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // Toggle filter drawer
-        toggleFilterButton.setOnClickListener(v -> {
-            if (filterDrawer.getVisibility() == View.GONE) {
-                filterDrawer.setVisibility(View.VISIBLE);
-            } else {
-                filterDrawer.setVisibility(View.GONE);
+        // Set up segmented control listener for toggling between views
+        segmentedControl.addOnButtonCheckedListener((group, checkedId, isChecked) -> {
+            if (isChecked) {
+                if (checkedId == R.id.btnCategorizedView) {
+                    isCategorizedView = true;
+                    updateCategoryList();
+                } else if (checkedId == R.id.btnAllVideos) {
+                    isCategorizedView = false;
+                    displayAllVideos();
+                }
+                // Update button appearance
+                updateButtonAppearance(checkedId);
             }
         });
-
-        // Apply filter button functionality
-        applyFiltersButton.setOnClickListener(v -> applyFilters());
     }
 
-    private void getJsonData() {
-        String URL = "https://raw.githubusercontent.com/YaraAlqarni/GameZone/main/gaming_videos.json";
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
+    private void updateButtonAppearance(int checkedId) {
+        int activeColor = getResources().getColor(R.color.active_button_color, null); // Define active color in colors.xml
+        int inactiveColor = getResources().getColor(R.color.inactive_button_color, null); // Define inactive color in colors.xml
 
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, URL, null,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
+        findViewById(R.id.btnCategorizedView).setBackgroundTintList(
+                checkedId == R.id.btnCategorizedView ? ColorStateList.valueOf(activeColor) : ColorStateList.valueOf(inactiveColor));
+
+        findViewById(R.id.btnAllVideos).setBackgroundTintList(
+                checkedId == R.id.btnAllVideos ? ColorStateList.valueOf(activeColor) : ColorStateList.valueOf(inactiveColor));
+    }
+
+
+    private void getJsonData() {
+        new Thread(() -> {
+            String URL = "https://raw.githubusercontent.com/YaraAlqarni/GameZone/main/gaming_videos.json";
+            RequestQueue requestQueue = Volley.newRequestQueue(this);
+
+            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, URL, null,
+                    response -> {
                         try {
                             JSONArray categories = response.getJSONArray("categories");
                             JSONObject categoriesData = categories.getJSONObject(0);
@@ -133,143 +133,109 @@ public class MainActivity extends AppCompatActivity {
                                 allVideos.add(video);
                             }
 
+                            allVideos.removeIf(Objects::isNull);  // Remove null entries
+
                             Log.d(TAG, "JSON Data Loaded: " + allVideos.size());
-                            noVideosText.setVisibility(allVideos.isEmpty() ? View.VISIBLE : View.GONE);
-                            adapter.notifyDataSetChanged();  // Ensure adapter updates
+                            runOnUiThread(() -> {
+                                noVideosText.setVisibility(allVideos.isEmpty() ? View.VISIBLE : View.GONE);
+                                updateCategoryList();
+                            });
                         } catch (JSONException e) {
                             Log.e(TAG, "JSON Parsing Error: " + e.getMessage());
                         }
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Log.d(TAG, "onErrorResponse: " + error.getMessage());
-                    }
-                }
-        );
+                    },
+                    error -> Log.d(TAG, "onErrorResponse: " + error.getMessage())
+            );
 
-        requestQueue.add(jsonObjectRequest);
+            requestQueue.add(jsonObjectRequest);
+        }).start();
     }
 
     private void fetchAndMatchFirebaseData() {
-        tournamentDatabaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    Tournament tournament = snapshot.getValue(Tournament.class);
-                    if (tournament != null) {
-                        for (Video video : allVideos) {
-                            if (tournament.getMode() != null) {
-                                video.setModes(tournament.getMode());
+        new Thread(() -> {
+            tournamentDatabaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    Map<String, Video> videoMap = new HashMap<>();
+                    for (Video video : allVideos) {
+                        videoMap.put(video.getTitle(), video);
+                    }
 
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                        Tournament tournament = snapshot.getValue(Tournament.class);
+                        if (tournament != null && tournament.getTitle() != null) {
+                            Video video = videoMap.get(tournament.getTitle());
 
-                                // Handle prize as Long or String
-
-                                Object prize = tournament.getPrize();
-                                try {
-                                    if (prize instanceof Long) {
-                                        video.setPrizeAmount((double) (Long) prize);
-                                    } else if (prize instanceof String) {
-                                        // Remove any unwanted characters (like "$" or ",") before parsing
-                                        video.setPrizeAmount(Double.parseDouble(((String) prize).replaceAll("[$,]", "")));
-                                    } else {
-                                        // Handle unexpected type by setting a default value
-                                        video.setPrizeAmount(0.0);
-                                        Log.w(TAG, "Unexpected prize format for tournament: " + tournament.getTitle());
-                                    }
-                                } catch (NumberFormatException e) {
-                                    video.setPrizeAmount(0.0); // Set a default or error value if parsing fails
-                                    Log.e(TAG, "Failed to parse prize amount for tournament: " + tournament.getTitle(), e);
+                            if (video != null) {
+                                if (tournament.getMode() != null) {
+                                    video.setModes(new ArrayList<>(tournament.getMode()));
+                                    Log.d(TAG, "Video Modes Loaded from Firebase for " + video.getTitle() + ": " + video.getModes());
                                 }
-
-
-
+                                video.setPrizeAmount(getParsedPrize(tournament.getPrize()));
                                 video.setLevel(tournament.getLevel());
-                                break;
+                                assignCategories(video);
                             }
                         }
                     }
+
+                    allVideos.removeIf(Objects::isNull);  // Remove null entries
+
+                    runOnUiThread(() -> updateCategoryList());
+                    Log.d(TAG, "Firebase Data Loaded and Merged: " + allVideos.size());
                 }
-                adapter.notifyDataSetChanged();
-                Log.d(TAG, "Firebase Data Loaded and Merged: " + allVideos.size());
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Log.e(TAG, "Firebase Data Fetch Error: " + error.getMessage());
-            }
-        });
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                    Log.e(TAG, "Firebase Data Fetch Error: " + error.getMessage());
+                }
+            });
+        }).start();
     }
 
-
-    private void applyFilters() {
-        List<Video> filteredVideos = new ArrayList<>();
-
-        // Get selected mode from ChipGroup
-        String selectedMode = null;
-        int checkedChipId = chipGroupMode.getCheckedChipId();
-        if (checkedChipId != -1) {
-            Chip selectedChip = chipGroupMode.findViewById(checkedChipId);
-            selectedMode = selectedChip != null ? selectedChip.getText().toString() : null;
-        }
-
-        // Get selected prize range from RangeSlider
-        List<Float> values = sliderPrizeRange.getValues();
-        float minPrize = values.get(0);
-        float maxPrize = values.get(1);
-
-        for (Video video : allVideos) {
-            List<String> videoModes = video.getModes();
-            double videoPrize = video.getPrizeAmount();
-
-            // Check if selectedMode is in the list of modes
-            boolean matchesMode = (selectedMode == null) ||
-                    (videoModes != null && videoModes.contains(selectedMode.toLowerCase()));
-
-            boolean matchesPrize = (videoPrize >= minPrize) && (videoPrize <= maxPrize);
-
-            if (matchesMode && matchesPrize) {
-                filteredVideos.add(video);
+    private double getParsedPrize(Object prize) {
+        try {
+            if (prize instanceof Long) {
+                return (double) (Long) prize;
+            } else if (prize instanceof Double) {
+                return (Double) prize;
+            } else if (prize instanceof String) {
+                return Double.parseDouble(((String) prize).replaceAll("[$,]", ""));
             }
-
-            // Logging for debugging
-            Log.d(TAG, "Video Title: " + video.getTitle() + ", Modes: " + videoModes + ", Prize: " + videoPrize);
-            Log.d(TAG, "Matches Mode: " + matchesMode + ", Matches Prize: " + matchesPrize);
+        } catch (NumberFormatException e) {
+            Log.e(TAG, "Failed to parse prize amount", e);
         }
+        return 0.0;
+    }
 
-        if (filteredVideos.isEmpty()) {
-            Toast.makeText(this, "No videos found", Toast.LENGTH_SHORT).show();
+    private void assignCategories(Video video) {
+        if (video.getPrizeAmount() > 1000000) {
+            video.setCategory("Top Prizes");
+        } else if (video.getModes() != null && video.getModes().contains("singleplayer")) {
+            video.setCategory("Single Player");
+        } else if (video.getModes() != null && video.getModes().contains("multiplayer")) {
+            video.setCategory("Multiplayer");
         } else {
-            adapter.setFilteredList(filteredVideos);
-            filterDrawer.setVisibility(View.GONE); // Hide drawer after applying filters
+            video.setCategory("Other");
         }
     }
 
-
-
-
-
-
-
-    // Helper function to check for an exact mode match
-    private boolean containsExactMode(String videoMode, String selectedMode) {
-        String[] modes = videoMode.split(",\\s*");  // Split by comma and trim whitespace
-        for (String mode : modes) {
-            if (mode.equalsIgnoreCase(selectedMode)) {
-                return true;
+    private void updateCategoryList() {
+        if (isCategorizedView) {
+            Map<String, List<Video>> categorizedVideos = new HashMap<>();
+            for (Video video : allVideos) {
+                String category = video.getCategory();
+                categorizedVideos.computeIfAbsent(category, k -> new ArrayList<>()).add(video);
             }
+            videoAdapter.setCategorizedData(categorizedVideos);
+        } else {
+            displayAllVideos();
         }
-        return false;
     }
 
-
-
-
-
-
-
-
+    private void displayAllVideos() {
+        videoAdapter.setFilteredList(allVideos);
+        noVideosText.setVisibility(allVideos.isEmpty() ? View.VISIBLE : View.GONE);
+    }
 
     private void filterVideos(String query) {
         List<Video> filteredVideos = new ArrayList<>();
@@ -280,7 +246,13 @@ public class MainActivity extends AppCompatActivity {
                 filteredVideos.add(video);
             }
         }
-        adapter.setFilteredList(filteredVideos);
+        assignCategoriesForFilteredList(filteredVideos);
+        videoAdapter.setFilteredList(filteredVideos);
+    }
+
+    private void assignCategoriesForFilteredList(List<Video> filteredVideos) {
+        for (Video video : filteredVideos) {
+            assignCategories(video);
+        }
     }
 }
-

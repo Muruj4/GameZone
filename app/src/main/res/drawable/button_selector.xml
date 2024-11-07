@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Selected State -->
+    <!-- res/drawable/button_selector.xml -->
+
+        <item android:drawable="@color/active_button_color" android:state_checked="true"/>
+        <item android:drawable="@color/inactive_button_color" android:state_checked="false"/>
+
+
+</selector>
