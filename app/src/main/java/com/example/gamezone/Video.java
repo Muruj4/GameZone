@@ -9,7 +9,7 @@ public class Video implements Serializable {
     private String videoUrl;
     private String imageUrl;
     private double prizeAmount;
-    private List<String> modes;
+    private String mode;
     private String level;
     private String category;  // Added category field
 
@@ -33,8 +33,8 @@ public class Video implements Serializable {
     public double getPrizeAmount() { return prizeAmount; }
     public void setPrizeAmount(double prizeAmount) { this.prizeAmount = prizeAmount; }
 
-    public List<String> getModes() { return modes; }
-    public void setModes(List<String> modes) { this.modes = modes; }
+    public String getMode() { return mode; }
+    public void setMode(String mode) { this.mode = mode; }
 
     public String getLevel() { return level; }
     public void setLevel(String level) { this.level = level; }

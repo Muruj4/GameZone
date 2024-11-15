@@ -10,9 +10,7 @@ public class Player {
     private String nickname;
     private String nationality;
     private String birthdate;
-    // Default constructor required for DataSnapshot.getValue(Player.class)
-    public Player() {
-    }
+
 
     // Constructor for creating a player with all details
     public Player(String playerId, String fullName, String email, String skillLevel, String preferredGame, String imageUrl, String nickname, String nationality, String birthdate) {
@@ -25,12 +23,6 @@ public class Player {
         this.nickname = nickname;
         this.nationality = nationality;
         this.birthdate = birthdate;
-    }
-
-    // Constructor for creating a player with just name and email
-    public Player(String fullName, String email) {
-        this.fullName = fullName;
-        this.email = email;
     }
 
     // Getters and Setters

@@ -6,18 +6,16 @@ public class Tournament {
     private String id;                // Unique ID for each tournament
     private String title;
     private String description;
-    private List<String> mode;
+    private String mode;
     private long prize;
     private String duration;
     private String startDate;
     private String level;
     private List<String> games;// List of games for tournaments with multiple games
 
-    // Default constructor required for Firebase
-    public Tournament() {
-    }
 
-    public Tournament(String id, String title, String description, List<String> mode, long prize,
+
+    public Tournament(String id, String title, String description, String mode, long prize,
                       String duration, String startDate, String level, List<String> games) {
         this.id = id;
         this.title = title;
@@ -55,11 +53,11 @@ public class Tournament {
         this.description = description;
     }
 
-    public List<String> getMode() {
+    public String getMode() {
         return mode;
     }
 
-    public void setMode(List<String> mode) {
+    public void setMode(String mode) {
         this.mode = mode;
     }
 
@@ -100,4 +98,5 @@ public class Tournament {
     public void setGames(List<String> games) {
         this.games = games;
     }
+
 }

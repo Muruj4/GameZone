@@ -14,19 +14,22 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.button.MaterialButtonToggleGroup;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.HashMap;
 import java.util.Objects;
+
+
 public class MainActivity extends AppCompatActivity {
 
     private RecyclerView videoList;
@@ -35,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
     private SearchView searchView;
     private MaterialButtonToggleGroup segmentedControl;
     private static final String TAG = "MainActivity";
+    private static final String TAG2 = "AddTournament";
     private List<Video> allVideos = new ArrayList<>();
     private DatabaseReference tournamentDatabaseReference;
     private boolean isCategorizedView = true;
@@ -57,7 +61,8 @@ public class MainActivity extends AppCompatActivity {
 
         // Initialize Firebase reference
         tournamentDatabaseReference = FirebaseDatabase.getInstance().getReference("tournaments");
-
+        // Check and add tournament data
+        addTournamentIfNotExists();
         // Load JSON data
         getJsonData();
 
@@ -151,6 +156,7 @@ public class MainActivity extends AppCompatActivity {
         }).start();
     }
 
+
     private void fetchAndMatchFirebaseData() {
         new Thread(() -> {
             tournamentDatabaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -168,8 +174,9 @@ public class MainActivity extends AppCompatActivity {
 
                             if (video != null) {
                                 if (tournament.getMode() != null) {
-                                    video.setModes(new ArrayList<>(tournament.getMode()));
-                                    Log.d(TAG, "Video Modes Loaded from Firebase for " + video.getTitle() + ": " + video.getModes());
+                                    video.setMode(tournament.getMode());
+
+                                    Log.d(TAG, "Video Modes Loaded from Firebase for " + video.getTitle() + ": " + video.getMode());
                                 }
                                 video.setPrizeAmount(getParsedPrize(tournament.getPrize()));
                                 video.setLevel(tournament.getLevel());
@@ -210,9 +217,9 @@ public class MainActivity extends AppCompatActivity {
     private void assignCategories(Video video) {
         if (video.getPrizeAmount() > 1000000) {
             video.setCategory("Top Prizes");
-        } else if (video.getModes() != null && video.getModes().contains("singleplayer")) {
+        } else if (video.getMode() != null && video.getMode().contains("singleplayer")) {
             video.setCategory("Single Player");
-        } else if (video.getModes() != null && video.getModes().contains("multiplayer")) {
+        } else if (video.getMode() != null && video.getMode().contains("multiplayer")) {
             video.setCategory("Multiplayer");
         } else {
             video.setCategory("Other");
@@ -254,5 +261,50 @@ public class MainActivity extends AppCompatActivity {
         for (Video video : filteredVideos) {
             assignCategories(video);
         }
+    }
+
+
+    private void addTournamentIfNotExists() {
+        List<Tournament> tournaments = Arrays.asList(
+                new Tournament("T01", "Gamers8", "Gamers8 is one of the biggest esports festivals in Saudi Arabia, featuring global tournaments across various popular games, with millions in prize money and live concerts.", "multiplayer", convertPrizeToLong("$45,000,000"), "8 weeks", "July", "Professional Level", Arrays.asList("Rocket League", "Fortnite", "Tekken 8", "Dota 2", "Starcraft 2")),
+                new Tournament("T02", "PUBG Mobile Star Challenge", "The PUBG Mobile Star Challenge World Cup was held in Riyadh, Saudi Arabia, where top teams from around the world competed in intense matches for the championship title and significant cash prizes.", "multiplayer", convertPrizeToLong("$250,000"), "4 weeks", "June", "Intermediate Level", Arrays.asList("Pubg")),
+                new Tournament("T03", "Rocket League MENA Cup", "The Rocket League MENA Cup, hosted in Riyadh, Saudi Arabia, attracted the best Rocket League teams from the Middle East and North Africa for a regional championship with high-stakes gameplay.", "multiplayer", convertPrizeToLong("$4,300,000"), "1 week", "February", "Professional Level", Arrays.asList("Rocket League")),
+                new Tournament("T04", "Intel Arabian Cup", "The Intel Arabian Cup, supported by Intel and Riot Games, is a League of Legends tournament that brings together the best players and teams from Saudi Arabia and the MENA region for exciting esports action and valuable prizes.", "multiplayer", convertPrizeToLong("$100,000"), "5 weeks", "May", "Beginner Level", Arrays.asList("League of Legends")),
+                new Tournament("T05", "FIFA Esports world Cup", "The FIFA eWorld Cup Qualifiers in Saudi Arabia allowed top FIFA players from the MENA region to compete for a place in the prestigious FIFA eWorld Cup, showcasing elite soccer gaming skills.", "multiplayer", convertPrizeToLong("$60,000,000"), "8 weeks", "July", "Professional Level", Arrays.asList("Dota 2", "League of Legends", "Rainbow six siege", "Dota 2", "Overwatch 2", "Street Fighter", "FIFA", "Honor of Kings")),
+                new Tournament("T06", "Apex Legends Global Series", "The Apex Legends Global Series showcases the finest teams as they engage in thrilling battle royale matches, pushing their skills and strategies to the limit. Fans worldwide tune in to witness electrifying gameplay and intense competition.", "singleplayer", convertPrizeToLong("$3,000,000"), "1 week", "January", "Intermediate Level", Arrays.asList("Apex Legend")),
+                new Tournament("T07", "Tekken 8 World Tour", "The Tekken 8 World Tour features the world's top Tekken players competing in a series of high-stakes tournaments. The event highlights remarkable skills and fierce rivalries, delivering a captivating experience for both players and fans.", "singleplayer", convertPrizeToLong("$300,000"), "6 weeks", "April", "Professional Level", Arrays.asList("Tekken 8")),
+                new Tournament("T08", "Clash Royale League", "The Clash Royale League is a premier global tournament where elite Clash Royale players and teams battle for supremacy. With real-time strategy and thrilling gameplay, this league offers fans unforgettable moments and intense competition.", "singleplayer", convertPrizeToLong("$50,000"), "5 weeks", "March", "Beginner Level", Arrays.asList("Clash Royale")),
+                new Tournament("T09", "Call of Duty WSOW", "The Call of Duty World Series of Warzone (WSOW) gathers top-tier Call of Duty players and teams in an exhilarating tournament format. Intense gunplay and strategic teamwork are on full display as they vie for victory and fame.", "multiplayer", convertPrizeToLong("$300,000"), "1 week", "July", "Professional Level", Arrays.asList("Call Of Duty")),
+                new Tournament("T10", "Global Esports Games", "The Riyadh Global Esports Games is a global, multi-title esports competition that showcases esports' energy through competitions and a dynamic celebration of esports culture and entertainment at the GEG Festival.", "multiplayer", convertPrizeToLong("$10,000,000"), "1 week", "December", "Professional Level", Arrays.asList("Valorant", "PUBG", "Tekken 8", "Dota 2", "Counter-Strike 2"))
+        );
+
+        for (Tournament tournament : tournaments) {
+            tournamentDatabaseReference.child(tournament.getId()).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    if (!dataSnapshot.exists()) {
+                        // Tournament does not exist, create it
+                        tournamentDatabaseReference.child(tournament.getId()).setValue(tournament)
+                                .addOnCompleteListener(task -> {
+                                    if (task.isSuccessful()) {
+                                        Log.d(TAG2, "Tournament " + tournament.getId() + " added successfully.");
+                                    } else {
+                                        Log.e(TAG2, "Failed to add tournament " + tournament.getId() + ": " + task.getException());
+                                    }
+                                });
+                    } else {
+                        Log.d(TAG2, "Tournament " + tournament.getId() + " already exists.");
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                    Log.e(TAG2, "Database error: " + databaseError.getMessage());
+                }
+            });
+        }
+    }
+    private Long convertPrizeToLong(String prize) {
+        return Long.parseLong(prize.replaceAll("[^0-9]", ""));
     }
 }
