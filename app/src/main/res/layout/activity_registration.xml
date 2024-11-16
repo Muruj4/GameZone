@@ -42,7 +42,11 @@
         android:backgroundTint="#333333"
         android:padding="12dp"
         android:layout_marginBottom="16dp"
-        android:inputType="textPersonName" />
+        android:inputType="textPersonName"
+        android:drawableStart="@drawable/person"
+        android:drawablePadding="8dp"
+        />
+
 
     <EditText
         android:id="@+id/email"
@@ -54,7 +58,9 @@
         android:backgroundTint="#333333"
         android:padding="12dp"
         android:layout_marginBottom="16dp"
-        android:inputType="textEmailAddress" />
+        android:inputType="textEmailAddress"
+        android:drawableStart="@drawable/email"
+        android:drawablePadding="8dp" />
 
     <EditText
         android:id="@+id/Password"
@@ -66,7 +72,9 @@
         android:backgroundTint="#333333"
         android:padding="12dp"
         android:layout_marginBottom="24dp"
-        android:inputType="textPassword" />
+        android:inputType="textPassword"
+        android:drawableStart="@drawable/password"
+        android:drawablePadding="8dp" />
 
 <RadioGroup
     android:id="@+id/rg_role"

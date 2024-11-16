@@ -29,7 +29,6 @@
         android:textStyle="bold"
         android:fontFamily="serif"
         android:layout_marginTop="10dp"/>
-
     <EditText
         android:id="@+id/email_Login"
         android:layout_width="match_parent"
@@ -41,7 +40,10 @@
         android:padding="12dp"
         android:textColor="#FFFFFF"
         android:textColorHint="#888888"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        android:drawableStart="@drawable/email"
+        android:drawablePadding="8dp" />
+
     <EditText
         android:id="@+id/password_Login"
         android:layout_width="match_parent"
@@ -53,7 +55,9 @@
         android:textColorHint="#888888"
         android:backgroundTint="#333333"
         android:padding="12dp"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        android:drawableStart="@drawable/password"
+        android:drawablePadding="8dp"/>
 
     <TextView
         android:id="@+id/ForgetPass"

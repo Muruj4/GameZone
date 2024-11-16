@@ -130,7 +130,8 @@
                 android:textColor="#FFFFFF"
                 android:textSize="14sp"
                 android:layout_gravity="start"
-                android:paddingBottom="8dp" />
+                android:paddingBottom="8dp"
+             />
 
             <!-- زر اختيار صورة -->
 
