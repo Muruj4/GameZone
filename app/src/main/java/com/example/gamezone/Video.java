@@ -12,6 +12,7 @@ public class Video implements Serializable {
     private String mode;
     private String level;
     private String category;  // Added category field
+    private List<String> categories;
 
     // Getters and Setters for basic details
     public String getTitle() { return title; }
@@ -39,8 +40,12 @@ public class Video implements Serializable {
     public String getLevel() { return level; }
     public void setLevel(String level) { this.level = level; }
 
-    public String getCategory() { return category; }
-    public void setCategory(String category) { this.category = category; }
+    public List<String> getCategories() {
+        return categories;
+    }
+    public void setCategories(List<String> categories) {
+        this.categories = categories;
+    }
 }
 
 

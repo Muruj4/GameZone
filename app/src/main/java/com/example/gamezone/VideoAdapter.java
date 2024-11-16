@@ -1,5 +1,4 @@
 package com.example.gamezone;
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -20,11 +19,16 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 public class VideoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private static final int TYPE_VIDEO = 0;
     private static final int TYPE_CATEGORY_HEADER = 1;
+
+    private static final Map<String, Integer> CATEGORY_ICONS = new HashMap<String, Integer>() {{
+        put("Top Prizes", R.drawable.ic_top_prizes);
+        put("Single Player", R.drawable.ic_single_player);
+        put("Multiplayer", R.drawable.ic_multiplayer);
+    }};
 
     private List<Video> allVideos;
     private Map<String, List<Video>> categorizedVideos;
@@ -37,15 +41,15 @@ public class VideoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         this.categorizedVideos = new HashMap<>();
         this.displayList = new ArrayList<>(allVideos);
     }
+    public void setFilteredList(List<Video> filteredVideos) {
+        this.displayList = new ArrayList<>(filteredVideos);
+        notifyDataSetChanged();
+    }
+
 
     public void setCategorizedData(Map<String, List<Video>> categorizedVideos) {
         this.categorizedVideos = categorizedVideos;
         updateDisplayListWithCategories();
-        notifyDataSetChanged();
-    }
-
-    public void setFilteredList(List<Video> filteredVideos) {
-        this.displayList = new ArrayList<>(filteredVideos);
         notifyDataSetChanged();
     }
 
@@ -74,7 +78,6 @@ public class VideoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         }
     }
 
-
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof CategoryHeaderViewHolder) {
@@ -92,40 +95,32 @@ public class VideoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     }
 
     // ViewHolder for category headers
-    // ViewHolder for category headers
     public static class CategoryHeaderViewHolder extends RecyclerView.ViewHolder {
         private final TextView categoryTitle;
+        private final ImageView categoryIcon;
 
         public CategoryHeaderViewHolder(@NonNull View itemView) {
             super(itemView);
             categoryTitle = itemView.findViewById(R.id.categoryTitle);
+            categoryIcon = itemView.findViewById(R.id.categoryIcon);
         }
-
 
         public void bind(String category) {
             categoryTitle.setText(category);
+
+            Integer iconResId = CATEGORY_ICONS.get(category);
+            if (iconResId != null) {
+                categoryIcon.setImageResource(iconResId);
+                categoryIcon.setVisibility(View.VISIBLE);
+            } else {
+                categoryIcon.setVisibility(View.GONE);
+            }
+
             categoryTitle.setAlpha(0f);
             categoryTitle.animate().alpha(1f).setDuration(500).start(); // Fade-in effect
-
-            switch (category) {
-                case "Single Player":
-                    categoryTitle.setBackgroundColor(Color.parseColor("#FF0B3347"));
-                    break;
-                case "Top Prizes":
-                    categoryTitle.setBackgroundColor(Color.parseColor("#FF0B3347"));
-                    break;
-                case "Multiplayer":
-                    categoryTitle.setBackgroundColor(Color.parseColor("#FF0B3347"));
-                    break;
-                default:
-                    categoryTitle.setBackgroundColor(Color.parseColor("#FF0B3347"));
-            }
         }
-
     }
 
-
-    // ViewHolder for video items
 
     // ViewHolder for video items
     public class VideoViewHolder extends RecyclerView.ViewHolder {
@@ -141,7 +136,7 @@ public class VideoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         }
 
         public void bind(Video video) {
-            if (video != null) {  // Check if video is not null
+            if (video != null) {
                 title.setText(video.getTitle());
                 Picasso.get().load(video.getImageUrl()).into(videoImage);
 

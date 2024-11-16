@@ -11,10 +11,13 @@ public class Tournament {
     private String duration;
     private String startDate;
     private String level;
-    private List<String> games;// List of games for tournaments with multiple games
+    private List<String> games;       // List of games for tournaments with multiple games
 
+    // No-argument constructor (required by Firebase)
+    public Tournament() {
+    }
 
-
+    // Full constructor
     public Tournament(String id, String title, String description, String mode, long prize,
                       String duration, String startDate, String level, List<String> games) {
         this.id = id;
@@ -24,7 +27,7 @@ public class Tournament {
         this.prize = prize;
         this.duration = duration;
         this.startDate = startDate;
-        this.level= level;
+        this.level = level;
         this.games = games;
     }
 
@@ -84,6 +87,7 @@ public class Tournament {
     public void setStartDate(String startDate) {
         this.startDate = startDate;
     }
+
     public String getLevel() {
         return level;
     }
@@ -91,6 +95,7 @@ public class Tournament {
     public void setLevel(String level) {
         this.level = level;
     }
+
     public List<String> getGames() {
         return games;
     }
@@ -98,5 +103,5 @@ public class Tournament {
     public void setGames(List<String> games) {
         this.games = games;
     }
-
 }
+
