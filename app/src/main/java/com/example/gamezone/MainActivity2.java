@@ -79,7 +79,7 @@ public class MainActivity2 extends AppCompatActivity {
         if (savedInstanceState == null) {
             replaceFragment(new homeFragment());  // Default fragment on app start
         }
-    }
+    }////
 
     private void replaceFragment(Fragment fragment) {
         // Start fragment transaction

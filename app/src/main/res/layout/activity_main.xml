@@ -20,7 +20,8 @@
         android:queryHint="Search for a tournament"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        />
 
     <!-- Segmented Control for Categorized and All Videos View -->
     <com.google.android.material.button.MaterialButtonToggleGroup

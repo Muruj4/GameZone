@@ -35,7 +35,7 @@ public class videoPlayer extends AppCompatActivity {
         TextView title = findViewById(R.id.videoTitle);
         TextView desc = findViewById(R.id.videoDescription);
         WebView videoWebView = findViewById(R.id.videoWebView);
-
+//
         // Set video information
         if (v != null) {
             title.setText(v.getTitle());

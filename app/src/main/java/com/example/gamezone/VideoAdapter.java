@@ -47,7 +47,7 @@ public class VideoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     private static final int TYPE_VIDEO = 0;
 
     private static final int TYPE_CATEGORY_HEADER = 1;
-
+//
 
 
     private static final Map<String, Integer> CATEGORY_ICONS = new HashMap<String, Integer>() {{

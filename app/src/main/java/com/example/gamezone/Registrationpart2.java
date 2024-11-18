@@ -27,7 +27,7 @@ import com.google.firebase.storage.UploadTask;
 
 import java.io.InputStream;
 import java.util.Calendar;
-
+//
 public class Registrationpart2 extends AppCompatActivity {
     Uri imageUri;
     ImageButton pickImageButton;

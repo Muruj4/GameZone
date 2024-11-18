@@ -21,7 +21,7 @@ public class Registration extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private EditText et_fullName, et_password, et_email;
     private DatabaseReference databaseReference;
-
+//
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

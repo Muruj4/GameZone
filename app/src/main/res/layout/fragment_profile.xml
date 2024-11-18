@@ -11,6 +11,7 @@
         android:layout_height="match_parent"
         android:text="Soon.."
         android:textSize="50dp"
-        android:gravity="center"/>
+        android:gravity="center"
+        />
 
 </FrameLayout>
