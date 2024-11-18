@@ -58,11 +58,13 @@
         <item>Philippine</item>
     </string-array>
 
-        <!-- Default range for the prize slider -->
-        <string-array name="default_range">
-            <item>10000</item> <!-- Starting value -->
-            <item>100000000</item> <!-- Ending value -->
-        </string-array>
+    <!-- Default range for the prize slider -->
+    <string-array name="default_range">
+        <item>10000</item> <!-- Starting value -->
+        <item>100000000</item> <!-- Ending value -->
+    </string-array>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>

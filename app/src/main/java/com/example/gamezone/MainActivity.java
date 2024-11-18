@@ -2,11 +2,15 @@ package com.example.gamezone;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.util.Log;
+import com.example.gamezone.R;
+import com.google.android.material.navigation.NavigationView;
+import androidx.drawerlayout.widget.DrawerLayout;
 import android.view.View;
 import android.widget.SearchView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.android.volley.Request;
@@ -20,6 +24,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -29,9 +36,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
 import java.util.Objects;
+import com.example.gamezone.databinding.ActivityMainBinding;
+import androidx.drawerlayout.widget.DrawerLayout;
+import com.google.android.material.navigation.NavigationView;
 
 
 public class MainActivity extends AppCompatActivity {
+
+
+
 
     private RecyclerView videoList;
     private VideoAdapter videoAdapter;
@@ -54,9 +67,14 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
 
-        // Initialize UI elements
+
+
+
+
+
+
+    // Initialize UI elements
         videoList = findViewById(R.id.videoList);
         noVideosText = findViewById(R.id.noVideosText);
         searchView = findViewById(R.id.searchView);
@@ -166,6 +184,11 @@ public class MainActivity extends AppCompatActivity {
             requestQueue.add(jsonObjectRequest);
         }).start();
     }
+
+
+
+
+
 
 
     private void fetchAndMatchFirebaseData() {
