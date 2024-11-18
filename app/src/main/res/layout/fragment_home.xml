@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background= "#7191A0"
+    tools:context=".MainActivity">
+
+
+    <!-- Search Bar -->
+
+
+    <SearchView
+        android:id="@+id/searchView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:queryHint="Search for a tournament"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Segmented Control for Categorized and All Videos View -->
+    <com.google.android.material.button.MaterialButtonToggleGroup
+        android:id="@+id/segmentedControl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:singleSelection="true"
+        app:selectionRequired="true"
+        app:layout_constraintTop_toBottomOf="@id/searchView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnCategorizedView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Categorized View"
+            style="@style/ToggleButtonStyle" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnAllVideos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="All Videos"
+            style="@style/ToggleButtonStyle" />
+    </com.google.android.material.button.MaterialButtonToggleGroup>
+
+
+    <!-- RecyclerView to Display Videos -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/videoList"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/segmentedControl"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- TextView to Display No Videos Available Message -->
+    <TextView
+        android:id="@+id/noVideosText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="No videos available"
+        android:visibility="gone"
+        android:textSize="16sp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
