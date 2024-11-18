@@ -3,11 +3,11 @@
     <string name="client_id">430408711375-v15h9inp64m5f17p63pbht6kdqj2vcin.apps.googleusercontent.com</string>
     <string name="level">gameZone</string>
     <string-array name="skill_levels">
-        <item>Level 1</item>
-        <item>Level 2</item>
-        <item>Level 3</item>
-        <item>Level 4</item>
-        <item>Level 5</item>
+        <item>Beginner</item>
+        <item>Casual</item>
+        <item>Advanced</item>
+        <item>Professional</item>
+        <item>Elite</item>
     </string-array>
 
 
@@ -17,6 +17,13 @@
         <item>Call of Duty</item>
         <item>League of Legends</item>
         <item>Destiny</item>
+        <item>Rocket League </item>
+        <item>Clash Royale</item>
+        <item>Tekken 8</item>
+        <item>Apex Legends</item>
+        <item>Valorant</item>
+
+
 
     </string-array>
     <string-array name="nationalities">

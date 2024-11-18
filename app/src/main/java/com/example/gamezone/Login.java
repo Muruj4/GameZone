@@ -156,7 +156,8 @@ public class Login extends AppCompatActivity {
 
                     Toast.makeText(Login.this, "Google Sign-In successful", Toast.LENGTH_SHORT).show();
 
-                    // Navigate to the next screen if login is successful
+                    Intent intent = new Intent(Login.this, MainActivity2.class);  // Replace 'NextActivity' with the actual class name of the activity you want to open
+                    startActivity(intent);
 
                 } else {
 
@@ -222,7 +223,8 @@ public class Login extends AppCompatActivity {
 
                     Toast.makeText(getApplicationContext(), "Login Successful!", Toast.LENGTH_LONG).show();
 
-                    // Navigate to the next screen if login is successful
+                    Intent intent = new Intent(Login.this, MainActivity2.class);  // Replace 'NextActivity' with the actual class name of the activity you want to open
+                    startActivity(intent);
 
                 } else {
 

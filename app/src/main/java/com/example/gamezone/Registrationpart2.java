@@ -65,6 +65,7 @@ public class Registrationpart2 extends AppCompatActivity {
             public void onClick(View v) {
                 uploadImageToFirebase();
             }
+
         });
     }
 
@@ -161,7 +162,10 @@ public class Registrationpart2 extends AppCompatActivity {
                 // Data saved successfully
                 Toast.makeText(Registrationpart2.this, "Player profile updated successfully!", Toast.LENGTH_SHORT).show();
                 Log.i("Database", "Player profile updated successfully!");
-                // Optionally, navigate to another activity or clear the form
+                Intent intent = new Intent(Registrationpart2.this, Login.class);  // Replace 'NextActivity' with the actual class name of the activity you want to open
+                intent.putExtra("playerId", playerId);  // Pass the playerId or other data if needed
+                startActivity(intent);
+                finish();
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override

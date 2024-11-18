@@ -8,7 +8,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#1C1C1E"
+    android:background="#7191A0"
     android:gravity="center">
 
 
@@ -28,7 +28,7 @@
         android:layout_gravity="center"
         android:layout_marginBottom="24dp"
         android:text="Registration"
-        android:textColor="#FFA500"
+        android:textColor="#FF0B3347"
         android:textStyle="bold"
         android:fontFamily="serif"
         android:textSize="30sp" />
@@ -39,7 +39,7 @@
         android:layout_height="wrap_content"
         android:hint="Full Name"
         android:textColor="#FFFFFF"
-        android:textColorHint="#888888"
+        android:textColorHint="#FF0B3347"
         android:backgroundTint="#333333"
         android:padding="12dp"
         android:layout_marginBottom="16dp"
@@ -55,7 +55,7 @@
         android:layout_height="wrap_content"
         android:hint="Email"
         android:textColor="#FFFFFF"
-        android:textColorHint="#888888"
+        android:textColorHint="#FF0B3347"
         android:backgroundTint="#333333"
         android:padding="12dp"
         android:layout_marginBottom="16dp"
@@ -69,7 +69,7 @@
         android:layout_height="wrap_content"
         android:hint="Password"
         android:textColor="#FFFFFF"
-        android:textColorHint="#888888"
+        android:textColorHint="#FF0B3347"
         android:backgroundTint="#333333"
         android:padding="12dp"
         android:layout_marginBottom="24dp"
@@ -89,7 +89,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:text="Player"
-    android:textColor="#FFFFFF"
+    android:textColor="#FF0B3347"
     android:layout_marginEnd="32dp"
 
      />
@@ -99,7 +99,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Organizer"
-        android:textColor="#FFFFFF"
+        android:textColor="#FF0B3347"
         android:checked="true"
         />
 
@@ -110,7 +110,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Register"
-        android:backgroundTint="#FFA500"
+        android:backgroundTint="#FF0B3347"
         android:textColor="#FFFFFF"
         android:padding="12dp"
         android:textSize="16sp"

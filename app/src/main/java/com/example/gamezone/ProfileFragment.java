@@ -6,9 +6,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class profileFragment extends Fragment {
+public class ProfileFragment extends Fragment {
 
-    public profileFragment() {
+    public ProfileFragment() {
         // Required empty public constructor
     }
 
