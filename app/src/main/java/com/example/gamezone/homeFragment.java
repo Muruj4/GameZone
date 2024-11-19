@@ -44,6 +44,13 @@ public class homeFragment extends Fragment {
     private List<Video> allVideos = new ArrayList<>();
     private DatabaseReference tournamentDatabaseReference;
     private boolean isCategorizedView = true;
+    private static final Map<String, Integer> CATEGORY_ICONS = new HashMap<String, Integer>() {{
+        put("Top Prizes", R.drawable.ic_top_prizes);
+        put("Single Player", R.drawable.ic_single_player);
+        put("Multiplayer", R.drawable.ic_multiplayer);
+    }};
+    private static final List<String> CATEGORY_ORDER = Arrays.asList("Top Prizes", "Single Player", "Multiplayer", "Other");
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -283,9 +290,16 @@ public class homeFragment extends Fragment {
 
     private void addTournamentIfNotExists() {
         List<Tournament> tournaments = Arrays.asList(
-                new Tournament("T01", "Gamers8", "Gamers8 is one of the biggest esports festivals in Saudi Arabia.", "multiplayer", convertPrizeToLong("$45,000,000"), "8 weeks", "July", "Professional Level", Arrays.asList("Rocket League", "Fortnite", "Tekken 8")),
-                // Add other tournaments...
-                new Tournament("T10", "Global Esports Games", "The Riyadh Global Esports Games is a global competition.", "multiplayer", convertPrizeToLong("$10,000,000"), "1 week", "December", "Professional Level", Arrays.asList("Valorant", "PUBG"))
+                new Tournament("T01", "Gamers8", "Gamers8 is one of the biggest esports festivals in Saudi Arabia, featuring global tournaments across various popular games, with millions in prize money and live concerts.", "multiplayer", convertPrizeToLong("$45,000,000"), "8 weeks", "July", "Professional Level", Arrays.asList("Rocket League", "Fortnite", "Tekken 8", "Dota 2", "Starcraft 2")),
+                new Tournament("T02", "PUBG Mobile Star Challenge", "The PUBG Mobile Star Challenge World Cup was held in Riyadh, Saudi Arabia, where top teams from around the world competed in intense matches for the championship title and significant cash prizes.", "multiplayer", convertPrizeToLong("$250,000"), "4 weeks", "June", "Intermediate Level", Arrays.asList("Pubg")),
+                new Tournament("T03", "Rocket League MENA Cup", "The Rocket League MENA Cup, hosted in Riyadh, Saudi Arabia, attracted the best Rocket League teams from the Middle East and North Africa for a regional championship with high-stakes gameplay.", "multiplayer", convertPrizeToLong("$4,300,000"), "1 week", "February", "Professional Level", Arrays.asList("Rocket League")),
+                new Tournament("T04", "Intel Arabian Cup", "The Intel Arabian Cup, supported by Intel and Riot Games, is a League of Legends tournament that brings together the best players and teams from Saudi Arabia and the MENA region for exciting esports action and valuable prizes.", "multiplayer", convertPrizeToLong("$100,000"), "5 weeks", "May", "Beginner Level", Arrays.asList("League of Legends")),
+                new Tournament("T05", "FIFA Esports World Cup", "The FIFA eWorld Cup Qualifiers in Saudi Arabia...", "multiplayer", convertPrizeToLong("$60,000,000"), "8 weeks", "July", "Professional Level", Arrays.asList("Dota 2", "League of Legends", "FIFA")),
+                new Tournament("T06", "Apex Legends Global Series", "The Apex Legends Global Series showcases the finest teams as they engage in thrilling battle royale matches, pushing their skills and strategies to the limit. Fans worldwide tune in to witness electrifying gameplay and intense competition.", "singleplayer", convertPrizeToLong("$3,000,000"), "1 week", "January", "Intermediate Level", Arrays.asList("Apex Legend")),
+                new Tournament("T07", "Tekken 8 World Tour", "The Tekken 8 World Tour features the world's top Tekken players competing in a series of high-stakes tournaments. The event highlights remarkable skills and fierce rivalries, delivering a captivating experience for both players and fans.", "singleplayer", convertPrizeToLong("$300,000"), "6 weeks", "April", "Professional Level", Arrays.asList("Tekken 8")),
+                new Tournament("T08", "Clash Royale League", "The Clash Royale League is a premier global tournament where elite Clash Royale players and teams battle for supremacy. With real-time strategy and thrilling gameplay, this league offers fans unforgettable moments and intense competition.", "singleplayer", convertPrizeToLong("$50,000"), "5 weeks", "March", "Beginner Level", Arrays.asList("Clash Royale")),
+                new Tournament("T09", "Call of Duty WSOW", "The Call of Duty World Series of Warzone (WSOW) gathers top-tier Call of Duty players and teams in an exhilarating tournament format. Intense gunplay and strategic teamwork are on full display as they vie for victory and fame.", "multiplayer", convertPrizeToLong("$300,000"), "1 week", "July", "Professional Level", Arrays.asList("Call Of Duty")),
+                new Tournament("T10", "Global Esports Games", "The Riyadh Global Esports Games is a global, multi-title esports competition that showcases esports' energy through competitions and a dynamic celebration of esports culture and entertainment at the GEG Festival.", "multiplayer", convertPrizeToLong("$10,000,000"), "1 week", "December", "Professional Level", Arrays.asList("Valorant", "PUBG", "Tekken 8", "Dota 2", "Counter-Strike 2"))
         );
 
         for (Tournament tournament : tournaments) {

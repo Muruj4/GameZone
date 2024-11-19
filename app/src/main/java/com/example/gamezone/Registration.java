@@ -75,19 +75,15 @@ public class Registration extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()) {
-                    RadioButton rbPlayer = findViewById(R.id.rb_player);
-                    if (rbPlayer.isChecked()) {
-                        Toast.makeText(getApplicationContext(), "Player has been registered!", Toast.LENGTH_LONG).show();
-                        Intent intent = new Intent(Registration.this, Registrationpart2.class);
-                        intent.putExtra("playerId", playerId);
-                        startActivity(intent);
-                    } else {
-                        Toast.makeText(getApplicationContext(), "Please select the player role!", Toast.LENGTH_SHORT).show();
-                    }
+                    Toast.makeText(getApplicationContext(), "Player has been registered!", Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(Registration.this, Registrationpart2.class);
+                    intent.putExtra("playerId", playerId);
+                    startActivity(intent);
                 } else {
                     Toast.makeText(getApplicationContext(), "Failed to save user data.", Toast.LENGTH_SHORT).show();
                 }
             }
         });
     }
+
 }

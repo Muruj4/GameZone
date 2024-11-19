@@ -36,7 +36,7 @@ public class MainActivity2 extends AppCompatActivity {
             return true;  // Item was handled
         });
 
-        // Set initial fragment (Optional: If you want to load a default fragment)
+
         if (savedInstanceState == null) {
             replaceFragment(new homeFragment());  // Default fragment on app start
         }

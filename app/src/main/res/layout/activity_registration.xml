@@ -77,33 +77,7 @@
         android:drawableStart="@drawable/password"
         android:drawablePadding="8dp" />
 
-<RadioGroup
-    android:id="@+id/rg_role"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:gravity="center"
-    android:layout_marginBottom="24dp">
-<RadioButton
-    android:id="@+id/rb_player"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="Player"
-    android:textColor="#FF0B3347"
-    android:layout_marginEnd="32dp"
 
-     />
-
-    <RadioButton
-        android:id="@+id/rb_organizer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Organizer"
-        android:textColor="#FF0B3347"
-        android:checked="true"
-        />
-
-</RadioGroup>
 
     <Button
         android:id="@+id/Register"
