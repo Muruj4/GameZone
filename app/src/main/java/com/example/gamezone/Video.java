@@ -10,6 +10,8 @@ public class Video implements Serializable {
 
     private String title;
 
+    private String id;
+
     private String description;
 
     private String author;
@@ -93,6 +95,12 @@ public class Video implements Serializable {
         this.categories = categories;
 
     }
+    public String getId() {
+        return id;
+    }
 
+    public void setId(String id) {
+        this.id = id;
+    }
 }
 

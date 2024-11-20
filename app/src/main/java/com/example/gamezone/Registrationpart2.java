@@ -1,6 +1,7 @@
 package com.example.gamezone;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -54,9 +55,16 @@ public class Registrationpart2 extends AppCompatActivity {
         storage = FirebaseStorage.getInstance();
         storageRef = storage.getReference();
 
-        // Get the playerId passed from the Registration activity
-        playerId = getIntent().getStringExtra("playerId");
-        databaseReference = FirebaseDatabase.getInstance().getReference("players").child(playerId); // Use the same playerId
+        // Retrieve playerId from SharedPreferences
+        SharedPreferences sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
+        playerId = sharedPreferences.getString("playerId", null);  // Retrieve the playerId
+
+        if (playerId == null) {
+            Toast.makeText(this, "Player ID not found!", Toast.LENGTH_SHORT).show();
+            finish();  // Finish the activity if playerId is not found
+        }
+
+        databaseReference = FirebaseDatabase.getInstance().getReference("players").child(playerId); // Use the same playerId for Firebase
 
         // Button to create profile and save data
         Button createProfileButton = findViewById(R.id.btn_create_profile);
@@ -65,9 +73,9 @@ public class Registrationpart2 extends AppCompatActivity {
             public void onClick(View v) {
                 uploadImageToFirebase();
             }
-
         });
     }
+
 
     public void opengallarie(View view) {
         Intent intentimg = new Intent(Intent.ACTION_GET_CONTENT);
@@ -162,8 +170,10 @@ public class Registrationpart2 extends AppCompatActivity {
                 // Data saved successfully
                 Toast.makeText(Registrationpart2.this, "Player profile updated successfully!", Toast.LENGTH_SHORT).show();
                 Log.i("Database", "Player profile updated successfully!");
-                Intent intent = new Intent(Registrationpart2.this, Login.class);  // Replace 'NextActivity' with the actual class name of the activity you want to open
-                intent.putExtra("playerId", playerId);  // Pass the playerId or other data if needed
+
+                // Navigate to Login activity
+                Intent intent = new Intent(Registrationpart2.this, Login.class);
+                intent.putExtra("playerId", playerId);  // Pass playerId to Login if needed
                 startActivity(intent);
                 finish();
             }
@@ -174,4 +184,5 @@ public class Registrationpart2 extends AppCompatActivity {
             }
         });
     }
+
 }

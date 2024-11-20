@@ -54,5 +54,6 @@ dependencies {
     implementation("com.android.volley:volley:1.2.1")
     implementation ("com.squareup.picasso:picasso:2.8")
     implementation ("com.google.android.exoplayer:exoplayer:2.18.1")
-
+    implementation ("com.github.bumptech.glide:glide:4.13.0")
+    annotationProcessor ("com.github.bumptech.glide:compiler:4.13.0")
 }

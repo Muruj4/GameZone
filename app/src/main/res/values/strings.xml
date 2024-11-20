@@ -5,6 +5,7 @@
     <string-array name="skill_levels">
         <item>Beginner</item>
         <item>Casual</item>
+        <item>Intermediate</item>
         <item>Advanced</item>
         <item>Professional</item>
         <item>Elite</item>
@@ -22,7 +23,6 @@
         <item>Tekken 8</item>
         <item>Apex Legends</item>
         <item>Valorant</item>
-
 
 
     </string-array>

@@ -2,11 +2,12 @@ package com.example.gamezone;
 
 
 
+import java.io.Serializable;
 import java.util.List;
 
 
 
-public class Tournament {
+public class Tournament implements Serializable {
 
     private String id;                // Unique ID for each tournament
 

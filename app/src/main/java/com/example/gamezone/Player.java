@@ -1,6 +1,8 @@
 package com.example.gamezone;
 
 
+import java.util.ArrayList;
+import java.util.List;
 
 public class Player {
 
@@ -22,9 +24,9 @@ public class Player {
 
     private String birthdate;
 
+    private List<String> RegisteredTournaments;
 
-
-
+    public Player() {}
 
     // Constructor for creating a player with all details
 
@@ -193,5 +195,13 @@ public class Player {
         this.birthdate = birthdate;
 
     }
+    public List<String> getRegisteredTournaments() {
+        return RegisteredTournaments;
+    }
+
+    public void setRegisteredTournaments(List<String> registeredTournaments) {
+        this.RegisteredTournaments = registeredTournaments;
+    }
+
 
 }

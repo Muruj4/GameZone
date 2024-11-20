@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -76,14 +77,22 @@ public class Registration extends AppCompatActivity {
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()) {
                     Toast.makeText(getApplicationContext(), "Player has been registered!", Toast.LENGTH_LONG).show();
+
+                    // Store the playerId in SharedPreferences
+                    SharedPreferences sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putString("playerId", playerId);  // Store the playerId
+                    editor.apply();  // Apply changes
+
+                    // Optionally pass the playerId to the next activity
                     Intent intent = new Intent(Registration.this, Registrationpart2.class);
-                    intent.putExtra("playerId", playerId);
-                    startActivity(intent);
+                    startActivity(intent);  // Just start Registrationpart2, playerId is stored globally
                 } else {
                     Toast.makeText(getApplicationContext(), "Failed to save user data.", Toast.LENGTH_SHORT).show();
                 }
             }
         });
     }
+
 
 }
