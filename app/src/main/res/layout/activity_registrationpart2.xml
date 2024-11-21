@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#7191A0"
+    android:background="#253449"
     android:padding="16dp"
     tools:context=".Registrationpart2">
 
@@ -24,20 +24,21 @@
 
             <ImageView
                 android:id="@+id/logo"
-                android:layout_width="200dp"
-                android:layout_height="200dp"
+                android:layout_width="223dp"
+                android:layout_height="207dp"
                 android:layout_gravity="center"
                 android:layout_marginBottom="24dp"
                 android:src="@drawable/logo" />
-
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Create player profile"
+                android:fontFamily="@font/bungee_shade"
+                android:textColor="#A390BC"
                 android:textSize="25sp"
                 android:textStyle="bold"
-                android:textColor="#FF0B3347"
+
                 android:gravity="center"
                 android:layout_gravity="center"
                 android:paddingBottom="24dp" />
@@ -45,10 +46,11 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Enter your nickname"
+                android:text="your nickname"
                 android:textColor="#FFFFFF"
                 android:textSize="14sp"
                 android:layout_gravity="start"
+                android:fontFamily="@font/audiowide"
                 android:paddingBottom="8dp" />
 
             <EditText
@@ -56,19 +58,24 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="#FFFFFF"
-                android:textColorHint="#B0B0B0"
+                android:textColorHint="#A390BC"
+                android:hint="Enter your nickname"
+                android:fontFamily="@font/audiowide"
                 android:padding="12dp"
+                android:backgroundTint="#A390BC"
                 android:layout_marginBottom="16dp" />
 
             <!-- حقل اختيار مستوى اللاعب -->
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:fontFamily="@font/audiowide"
+                android:paddingBottom="8dp"
                 android:text="Choose your level"
                 android:textColor="#FFFFFF"
-                android:textSize="14sp"
-                android:layout_gravity="start"
-                android:paddingBottom="8dp" />
+                android:textSize="14sp" />
 
             <Spinner
                 android:id="@+id/spinner_skill_level"
@@ -77,9 +84,10 @@
                 android:layout_marginBottom="16dp"
                 android:padding="12dp"
                 android:background="@drawable/spinner_background"
-                android:backgroundTint="#FF0B3347"
+                android:backgroundTint="#A390BC"
                 android:entries="@array/skill_levels"
                 android:spinnerMode="dropdown"
+                android:fontFamily="@font/audiowide"
                 android:textColor="#FFFFFF" />
 
             <!-- حقل اختيار الألعاب المفضلة -->
@@ -90,6 +98,7 @@
                 android:textColor="#FFFFFF"
                 android:textSize="14sp"
                 android:layout_gravity="start"
+                android:fontFamily="@font/audiowide"
                 android:paddingBottom="8dp" />
 
             <Spinner
@@ -98,8 +107,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
                 android:padding="12dp"
+                android:backgroundTint="#A390BC"
                 android:background="@drawable/spinner_background"
-                android:backgroundTint="#FF0B3347"
                 android:entries="@array/preferred_games"
                 android:textColor="#FFFFFF" />
 
@@ -110,6 +119,7 @@
                 android:textColor="#FFFFFF"
                 android:textSize="14sp"
                 android:layout_gravity="start"
+                android:fontFamily="@font/audiowide"
                 android:paddingBottom="8dp" />
 
             <!-- حقل اختيار تاريخ الميلاد -->
@@ -119,7 +129,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
                 android:background="@drawable/spinner_background"
-                android:backgroundTint="#FF0B3347"
+                android:backgroundTint="#A390BC"
                 android:entries="@array/nationalities"
                 android:padding="12dp"
                 android:textColor="#FFFFFF" />
@@ -130,6 +140,7 @@
                 android:text="Select your birthdate"
                 android:textColor="#FFFFFF"
                 android:textSize="14sp"
+                android:fontFamily="@font/audiowide"
                 android:layout_gravity="start"
                 android:paddingBottom="8dp"
              />
@@ -141,7 +152,7 @@
                 android:layout_width="180dp"
                 android:layout_height="50dp"
                 android:layout_marginBottom="16dp"
-                android:background="#FF0B3347"
+                android:backgroundTint="#A390BC"
                 android:calendarViewShown="false"
                 android:theme="@style/DatePickerTheme" />
 
@@ -165,8 +176,8 @@
                 android:textSize="18sp"
                 android:layout_gravity="center"
                 android:textColor="#FFFFFF"
-                android:backgroundTint="#FF0B3347"
-                android:text="Create profile"
+                android:fontFamily="@font/audiowide"
+                android:backgroundTint="#A89354"                android:text="Create profile"
                 android:layout_marginTop="24dp" />
 
         </LinearLayout>

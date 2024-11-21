@@ -41,11 +41,8 @@ import com.google.android.material.navigation.NavigationView;
 
 
 public class MainActivity extends AppCompatActivity {
-//
 
 
-
-    private RecyclerView videoList;
     private VideoAdapter videoAdapter;
     private TextView noVideosText;
     private SearchView searchView;
@@ -66,15 +63,23 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
 
 
+        // Initialize UI elements
+        RecyclerView videoList = findViewById(R.id.videoList);
+
+        if (videoList == null) {
+            Log.e("MainActivity", "RecyclerView not found!");
+            return; // Exit if RecyclerView is not found
+        }
+
+        // Set up the RecyclerView and the adapter
+        videoList.setLayoutManager(new LinearLayoutManager(this)); // Ensure LayoutManager is set
+        videoAdapter = new VideoAdapter(this, allVideos);  // Initialize the adapter with your video data
+        videoList.setAdapter(videoAdapter);
 
 
-
-
-
-    // Initialize UI elements
-        videoList = findViewById(R.id.videoList);
         noVideosText = findViewById(R.id.noVideosText);
         searchView = findViewById(R.id.searchView);
         segmentedControl = findViewById(R.id.segmentedControl);
@@ -282,14 +287,15 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+
     private void updateCategoryList() {
         if (isCategorizedView) {
             Map<String, List<Video>> categorizedVideos = new HashMap<>();
 
             for (Video video : allVideos) {
-                // Skip videos with null categories (shouldn't happen if assignCategories is fixed)
-                if (video.getCategories() == null) {
-                    Log.e("UpdateCategoryList", "Video " + video.getTitle() + " has null categories.");
+                // Skip videos with null categories
+                if (video.getCategories() == null || video.getCategories().isEmpty()) {
+                    Log.e("UpdateCategoryList", "Video " + video.getTitle() + " has no categories assigned.");
                     continue;
                 }
 
@@ -307,9 +313,6 @@ public class MainActivity extends AppCompatActivity {
             displayAllVideos();
         }
     }
-
-
-
 
 
 
@@ -336,6 +339,7 @@ public class MainActivity extends AppCompatActivity {
             assignCategories(video);
         }
     }
+
 
 
     private void addTournamentIfNotExists() {

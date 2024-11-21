@@ -3,9 +3,9 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-    <color name="active_button_color">#FF0B3347</color> <!-- Active color, e.g., purple -->
-    <color name="inactive_button_color">#4B626D</color> <!-- Inactive color, e.g., light gray -->
-    <color name="rb_inactive_button_color">#7191A0</color>
-    <color name="primaryColor">#748E9B</color>
+    <color name="active_button_color">#7191A0</color>
+    <color name="inactive_button_color">#355564</color>
+    <color name="rb_inactive_button_color">#355564</color>
+    <color name="primaryColor">#253449</color>
     <string name="category_icon">Category Icon</string>
 </resources>

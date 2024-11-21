@@ -6,7 +6,7 @@
 
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background= "#7191A0"
+    android:background= "#253449"
     tools:context=".MainActivity">
 
 
@@ -39,6 +39,7 @@
             android:id="@+id/btnCategorizedView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/audiowide"
             android:text="Categorized View"
             style="@style/ToggleButtonStyle" />
 
@@ -47,6 +48,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="All Videos"
+            android:fontFamily="@font/audiowide"
+
             style="@style/ToggleButtonStyle" />
     </com.google.android.material.button.MaterialButtonToggleGroup>
 
@@ -55,7 +58,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/videoList"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="match_parent"
         app:layout_constraintTop_toBottomOf="@id/segmentedControl"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -13,7 +13,7 @@
     </style>
 
     <style name="ToggleButtonStyle" parent="Widget.MaterialComponents.Button.TextButton">
-        <item name="backgroundTint">@color/primaryColor</item>
+        <item name="backgroundTint">#355564</item>
         <item name="strokeWidth">2dp</item>
         <item name="strokeColor">@color/white</item>
         <item name="cornerRadius">16dp</item>

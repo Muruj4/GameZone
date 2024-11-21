@@ -5,12 +5,22 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#7191A0"
+    android:background="#253449"
     tools:context=".videoPlayer">
 
     <!-- Video Title TextView -->
 
     <!-- Back Button ImageButton -->
+
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="176dp"
+        android:layout_height="156dp"
+        android:layout_gravity="center"
+        android:src="@drawable/logo"
+        tools:layout_editor_absoluteX="117dp"
+        tools:layout_editor_absoluteY="-16dp"
+        tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/videoTitle"
@@ -19,7 +29,8 @@
         android:layout_marginTop="104dp"
         android:gravity="center"
         android:text="Video Title"
-        android:textColor="#FF0B3347"
+        android:fontFamily="@font/bungee_shade"
+        android:textColor="#A390BC"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -29,13 +40,13 @@
 
     <ImageButton
         android:id="@+id/backButton"
-        android:layout_width="25dp"
-        android:layout_height="21dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:background="@android:color/transparent"
         android:contentDescription="Back"
-        android:src="@drawable/ic_arrow_back"
+        android:src="@drawable/baseline_keyboard_backspace_24"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -53,6 +64,7 @@
         android:layout_marginTop="56dp"
         android:layout_marginEnd="16dp"
         android:text="Video Description"
+        android:fontFamily="@font/audiowide"
         android:textColor="@color/white"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -63,14 +75,15 @@
     <TextView
 
         android:id="@+id/read_more"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="104dp"
+        android:layout_height="51dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="16dp"
+        android:fontFamily="@font/audiowide"
         android:onClick="read_more_on_click"
         android:text="read more"
-        android:textColor="#FF0B3347"
+        android:textColor="#A390BC"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -83,7 +96,7 @@
         android:id="@+id/videoWebView"
         android:layout_width="0dp"
         android:layout_height="220dp"
-        android:layout_marginTop="112dp"
+        android:layout_marginTop="4dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -95,8 +108,9 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:layout_marginTop="180dp"
-        android:backgroundTint="#FF0B3347"
+        android:fontFamily="@font/audiowide"
         android:text="Enroll"
+        android:backgroundTint="#A89354"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
