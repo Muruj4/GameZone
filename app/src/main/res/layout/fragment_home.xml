@@ -38,8 +38,8 @@
             android:id="@+id/btnCategorizedView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Categorized View"
-            android:fontFamily="@font/audiowide"
+            android:text="Categorized Videos"
+            android:fontFamily="@font/cherry_bomb_one"
             style="@style/ToggleButtonStyle" />
 
         <com.google.android.material.button.MaterialButton
@@ -47,7 +47,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="All Videos"
-            android:fontFamily="@font/audiowide"
+            android:fontFamily="@font/cherry_bomb_one"
             style="@style/ToggleButtonStyle" />
     </com.google.android.material.button.MaterialButtonToggleGroup>
 
