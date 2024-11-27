@@ -10,21 +10,13 @@
 
     <!-- Profile Name TextView -->
 
-    <ImageView
-        android:id="@+id/logo"
-        android:layout_width="156dp"
-        android:layout_height="161dp"
-        android:layout_gravity="center"
-        android:src="@drawable/logo"
-        tools:layout_editor_absoluteX="127dp"
-        tools:layout_editor_absoluteY="537dp"
-        tools:ignore="MissingConstraints" />
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/profile_image"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:layout_marginTop="88dp"
+        android:layout_marginTop="104dp"
+        android:gravity="center"
         android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -34,16 +26,17 @@
 
     <TextView
         android:id="@+id/registered_tournaments_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:fontFamily="@font/cherry_bomb_one"
+        android:layout_width="401dp"
+        android:layout_height="67dp"
+        android:layout_marginTop="36dp"
+        android:fontFamily="@font/press_start_2p"
+        android:gravity="center"
         android:text="Registered Tournaments:"
         android:textColor="#A390BC"
-        android:textSize="24sp"
+        android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.547"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/profile_email" />
 
@@ -52,13 +45,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
-        android:fontFamily="@font/cherry_bomb_one"
+        android:fontFamily="@font/press_start_2p"
+        android:gravity="center"
         android:text="Player Name"
         android:textColor="#A390BC"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.521"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/profile_image" />
 
@@ -66,14 +60,14 @@
         android:id="@+id/profile_email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="44dp"
         android:drawablePadding="8dp"
-        android:fontFamily="@font/cherry_bomb_one"
+        android:fontFamily="@font/press_start_2p"
+        android:gravity="center"
         android:text="player@example.com"
         android:textColor="#A390BC"
-        android:textSize="22sp"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.532"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/profile_name" />
 
@@ -81,14 +75,14 @@
         android:id="@+id/registered_tournaments"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:fontFamily="@font/cherry_bomb_one"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/press_start_2p"
         android:gravity="center"
         android:text="No registered tournaments"
         android:textColor="#A390BC"
-        android:textSize="22sp"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.542"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/registered_tournaments_label" />
 
@@ -96,13 +90,25 @@
         android:id="@+id/logout_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="108dp"
+        android:layout_marginTop="84dp"
         android:backgroundTint="#A89354"
-        android:fontFamily="@font/bungee_shade"
+        android:fontFamily="@font/press_start_2p"
+        android:gravity="center"
         android:text="Logout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/registered_tournaments" />
+
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="156dp"
+        android:layout_height="161dp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:src="@drawable/logo"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="127dp"
+        tools:layout_editor_absoluteY="545dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

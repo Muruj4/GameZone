@@ -77,20 +77,20 @@
                 android:textColor="#FFFFFF"
                 android:textSize="14sp" />
 
+            <!-- حقل اختيار الألعاب المفضلة -->
             <Spinner
                 android:id="@+id/spinner_skill_level"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
-                android:padding="12dp"
                 android:background="@drawable/spinner_background"
                 android:backgroundTint="#A390BC"
                 android:entries="@array/skill_levels"
-                android:spinnerMode="dropdown"
                 android:fontFamily="@font/audiowide"
+                android:padding="12dp"
+                android:spinnerMode="dropdown"
                 android:textColor="#FFFFFF" />
 
-            <!-- حقل اختيار الألعاب المفضلة -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
